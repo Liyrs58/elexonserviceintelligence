@@ -9,9 +9,11 @@ import uuid
 import pandas as pd
 import requests
 from src.ingest.client import BASE,get_response,write_new
+from src.validate.run_status import require_successful_run
 
 
 def investigate(processed: Path, raw_root: Path):
+    require_successful_run(processed)
     frame=pd.read_csv(processed/'settlement.csv')
     selected=frame.loc[[frame.system_price.idxmax(),frame.system_price.idxmin(),frame.niv.abs().idxmax()]].drop_duplicates('event_id')
     snapshot=raw_root/(datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-context-'+uuid.uuid4().hex[:8])

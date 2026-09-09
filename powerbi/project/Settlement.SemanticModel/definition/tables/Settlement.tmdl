@@ -217,7 +217,8 @@ table 'Settlement'
 		mode: import
 		source =
 			let
-				Source = Csv.Document(File.Contents(DataFolder & "/processed/settlement.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Run = Json.Document(File.Contents(DataFolder & "/processed/run.json")),
+				Source = if Record.FieldOrDefault(Run, "status", "unknown") <> "success" then error "Latest pipeline run did not succeed. Rebuild validated outputs before refreshing." else Csv.Document(File.Contents(DataFolder & "/processed/settlement.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
 				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				Typed = Table.TransformColumnTypes(Headers, {{"settlement_date", type date}, {"settlement_period", Int64.Type}, {"event_id", type text}, {"system_price", type number}, {"niv", type number}, {"absolute_niv", type number}, {"system_length", type text}, {"price_percentile", type number}, {"niv_percentile", type number}, {"price_flag", type logical}, {"imbalance_flag", type logical}, {"is_exception", type logical}, {"reason_flagged", type text}, {"severity", type text}, {"quality_status", type text}, {"price_bin_lower", Int64.Type}, {"niv_bin_lower", Int64.Type}, {"retrieved_at", type text}}, "en-GB")
 			in

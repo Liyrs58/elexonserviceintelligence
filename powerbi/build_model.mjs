@@ -28,6 +28,8 @@ function table(name,file,columns,measures=[],description=''){
   const types={string:'type text',int64:'Int64.Type',double:'type number',decimal:'Currency.Type',boolean:'type logical',dateTime:'type date'};
   const conversions=columns.map(c=>`{"${c[1]}", ${types[c[2]]}}`).join(', ');
   text+=`\n\tpartition ${quote(name)} = m\n\t\tmode: import\n\t\tsource =\n\t\t\tlet\n\t\t\t\tSource = Csv.Document(File.Contents(DataFolder & "/${file}"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),\n\t\t\t\tHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),\n\t\t\t\tTyped = Table.TransformColumnTypes(Headers, {${conversions}}, "en-GB")\n\t\t\tin\n\t\t\t\tTyped\n`;
+  // Force every CSV query to evaluate the latest pipeline status before reading.
+  text=text.replace('Source = Csv.Document(', 'Run = Json.Document(File.Contents(DataFolder & "/processed/run.json")),\n\t\t\t\tSource = if Record.FieldOrDefault(Run, "status", "unknown") <> "success" then error "Latest pipeline run did not succeed. Rebuild validated outputs before refreshing." else Csv.Document(');
   fs.writeFileSync(path.join(def,'tables',name+'.tmdl'),text);
 }
 const price='#,##0.00 "GBP/MWh"',volume='#,##0.00 "MWh"',count='#,##0';

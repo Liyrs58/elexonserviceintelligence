@@ -14,6 +14,24 @@ from src.validate.source_audit import audit_sources
 
 
 def run(manifest_path: Path, output: Path, quality: Path | None = None):
+    """Invalidate a prior success before refresh; consumers must gate on run.json.
+
+    Existing exports remain recoverable but must not be consumed while status is
+    running/failed. A successful rebuild replaces the marker only at the end.
+    """
+    output.mkdir(parents=True,exist_ok=True)
+    marker=dict(manifest=str(manifest_path.resolve()),status='running',
+                started_at=datetime.now(timezone.utc).isoformat())
+    (output/'run.json').write_text(json.dumps(marker,indent=2))
+    try:
+        return _run(manifest_path,output,quality)
+    except BaseException as error:
+        marker.update(status='failed',error=str(error),finished_at=datetime.now(timezone.utc).isoformat())
+        (output/'run.json').write_text(json.dumps(marker,indent=2))
+        raise
+
+
+def _run(manifest_path: Path, output: Path, quality: Path | None = None):
     manifest=json.loads(manifest_path.read_text())
     if manifest['status']!='success':
         raise ValueError('Cannot analyse incomplete ingestion')

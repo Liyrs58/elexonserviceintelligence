@@ -26,7 +26,8 @@ table 'Source Controls'
 		mode: import
 		source =
 			let
-				Source = Csv.Document(File.Contents(DataFolder & "/quality/source_controls.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Run = Json.Document(File.Contents(DataFolder & "/processed/run.json")),
+				Source = if Record.FieldOrDefault(Run, "status", "unknown") <> "success" then error "Latest pipeline run did not succeed. Rebuild validated outputs before refreshing." else Csv.Document(File.Contents(DataFolder & "/quality/source_controls.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
 				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				Typed = Table.TransformColumnTypes(Headers, {{"control", type text}, {"status", type text}, {"detail", type text}}, "en-GB")
 			in

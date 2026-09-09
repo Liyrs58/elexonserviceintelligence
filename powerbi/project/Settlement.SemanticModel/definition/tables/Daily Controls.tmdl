@@ -114,7 +114,8 @@ table 'Daily Controls'
 		mode: import
 		source =
 			let
-				Source = Csv.Document(File.Contents(DataFolder & "/quality/daily_controls.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Run = Json.Document(File.Contents(DataFolder & "/processed/run.json")),
+				Source = if Record.FieldOrDefault(Run, "status", "unknown") <> "success" then error "Latest pipeline run did not succeed. Rebuild validated outputs before refreshing." else Csv.Document(File.Contents(DataFolder & "/quality/daily_controls.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
 				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				Typed = Table.TransformColumnTypes(Headers, {{"settlement_date", type date}, {"expected_periods", Int64.Type}, {"received_periods", Int64.Type}, {"missing_periods", Int64.Type}, {"duplicate_periods", Int64.Type}, {"null_values", Int64.Type}, {"schema_exceptions", Int64.Type}, {"validation_exceptions", Int64.Type}, {"retrieval_status", type text}, {"clock_change", type logical}}, "en-GB")
 			in

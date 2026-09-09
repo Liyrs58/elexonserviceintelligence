@@ -2,9 +2,11 @@
 import json
 from pathlib import Path
 import pandas as pd
+from src.validate.run_status import require_successful_run
 
 def build():
     root=Path('data/processed')
+    require_successful_run(root)
     frame=pd.read_csv(root/'settlement.csv')
     reviewed={r['event_id']:r for r in json.loads((root/'investigations.json').read_text())}
     rows=[]
