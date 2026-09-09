@@ -71,6 +71,7 @@ The semantic model has Date and Settlement Period dimensions, Settlement and Dai
 - Service insight note: `reports/service-insight-note.pdf`.
 - Editable presentation: `reports/presentation/settlement-service-intelligence.pptx`; reviewed PDF export: `reports/presentation/settlement-service-intelligence.pdf`.
 - Presentation verification: `reports/presentation-qa.md`.
+- Licensed Power BI close-out checklist: `reports/powerbi-live-verification-checklist.md`.
 - Reproducibility audit: `reports/reproducibility-qa.md`.
 - Definitions and analytical assumptions: `METHODOLOGY.md`.
 - Domain/API/tool sources and benchmark references: `SOURCES.md` and `research/`.

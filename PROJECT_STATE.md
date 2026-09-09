@@ -26,6 +26,7 @@ Three detailed cases cover maximum price, minimum price and maximum absolute NIV
 - One-page service note: `reports/service-insight-note.pdf`, with source builder and visual QA.
 - Eight-slide editable presentation: `reports/presentation/settlement-service-intelligence.pptx`, plus reviewed PDF export. Package, geometry, font, first-party reimport and native-chart checks pass.
 - Reviewer records: `reports/reproducibility-qa.md`, `reports/powerbi-definition-qa.md`, `reports/insight-note-qa.md`, `reports/presentation-qa.md`, `reports/source-link-qa.md`, `reports/claim-audit.md` and `reports/requirements-audit.md`.
+- Live close-out runbook: `reports/powerbi-live-verification-checklist.md`, including all 19 expected values, filter-context checks, page QA, performance evidence and screenshot naming.
 - Reviewer documentation: `README.md`, `METHODOLOGY.md`, `DECISIONS.md`, `SOURCES.md`, `SETUP_REPORT.md`, `SETUP_SOURCES.md` and `data/README.md`.
 
 ## Remaining external gate
