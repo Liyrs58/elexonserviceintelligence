@@ -1,0 +1,54 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local tooling clones and package caches
+.tools/
+node_modules/
+npm-debug.log*
+
+# Data and generated artifacts (keep directory placeholders)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/quality/*
+!data/quality/.gitkeep
+reports/*
+!reports/.gitkeep
+screenshots/*
+!screenshots/.gitkeep
+
+# Power BI local/temporary artifacts
+*.pbix
+*.pbit
+*.abf
+*.log
+powerbi/.pbi/
+powerbi/**/.pbi/
+powerbi/**/*LocalSettings.json
+powerbi/**/*cache.abf
+
+# General temporary/export files
+tmp/
+temp/
+*.tmp
+*.bak
+*.zip
