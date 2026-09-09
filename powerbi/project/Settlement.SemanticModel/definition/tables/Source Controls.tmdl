@@ -1,0 +1,33 @@
+/// Disconnected audit utility table, whole-snapshot controls unaffected by analytical slicers
+table 'Source Controls'
+
+	/// DERIVED: Control
+	column 'Control'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: control
+		annotation EvidenceClass = DERIVED
+
+	/// FLAG: Status
+	column 'Status'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+		annotation EvidenceClass = FLAG
+
+	/// DERIVED: Detail
+	column 'Detail'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: detail
+		annotation EvidenceClass = DERIVED
+
+	partition 'Source Controls' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents(DataFolder & "/quality/source_controls.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"control", type text}, {"status", type text}, {"detail", type text}}, "en-GB")
+			in
+				Typed

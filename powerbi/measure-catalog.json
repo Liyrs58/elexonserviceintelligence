@@ -1,0 +1,154 @@
+[
+  {
+    "table": "Date",
+    "measure": "Expected Settlement Periods",
+    "dax": "SUM('Date'[Expected Periods])",
+    "format": "#,##0",
+    "definition": "Expected half-hours under selected dates, including clock changes",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Settlement Periods",
+    "dax": "COUNTROWS('Settlement')",
+    "format": "#,##0",
+    "definition": "Received period count within filter context",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Average System Price",
+    "dax": "AVERAGE('Settlement'[System Price Value])",
+    "format": "#,##0.00 \"GBP/MWh\"",
+    "definition": "Arithmetic mean of period prices",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Median System Price",
+    "dax": "MEDIAN('Settlement'[System Price Value])",
+    "format": "#,##0.00 \"GBP/MWh\"",
+    "definition": "Median of period prices",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Maximum System Price",
+    "dax": "MAX('Settlement'[System Price Value])",
+    "format": "#,##0.00 \"GBP/MWh\"",
+    "definition": "Highest period price",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Minimum System Price",
+    "dax": "MIN('Settlement'[System Price Value])",
+    "format": "#,##0.00 \"GBP/MWh\"",
+    "definition": "Lowest period price",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Average NIV",
+    "dax": "AVERAGE('Settlement'[NIV Value])",
+    "format": "#,##0.00 \"MWh\"",
+    "definition": "Mean signed NIV",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Average Absolute NIV",
+    "dax": "AVERAGE('Settlement'[Absolute NIV Value])",
+    "format": "#,##0.00 \"MWh\"",
+    "definition": "Mean absolute NIV",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Maximum Absolute NIV",
+    "dax": "MAX('Settlement'[Absolute NIV Value])",
+    "format": "#,##0.00 \"MWh\"",
+    "definition": "Largest absolute NIV",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Short Settlement Periods",
+    "dax": "CALCULATE([Settlement Periods], KEEPFILTERS('Settlement'[System Length] = \"Short\"))",
+    "format": "#,##0",
+    "definition": "Count of positive-NIV periods",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Long Settlement Periods",
+    "dax": "CALCULATE([Settlement Periods], KEEPFILTERS('Settlement'[System Length] = \"Long\"))",
+    "format": "#,##0",
+    "definition": "Count of negative-NIV periods",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Extreme Price Periods",
+    "dax": "CALCULATE([Settlement Periods], KEEPFILTERS('Settlement'[Price Flag] = TRUE()))",
+    "format": "#,##0",
+    "definition": "Period count satisfying fixed full-quarter price thresholds",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Extreme Imbalance Periods",
+    "dax": "CALCULATE([Settlement Periods], KEEPFILTERS('Settlement'[Imbalance Flag] = TRUE()))",
+    "format": "#,##0",
+    "definition": "Period count satisfying fixed full-quarter absolute-NIV threshold",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Settlement",
+    "measure": "Analytical Exceptions",
+    "dax": "CALCULATE([Settlement Periods], KEEPFILTERS('Settlement'[Exception] = TRUE()))",
+    "format": "#,##0",
+    "definition": "Distinct periods flagged by either screening rule",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Daily Controls",
+    "measure": "Data Completeness %",
+    "dax": "DIVIDE(SUM('Daily Controls'[Received]), SUM('Daily Controls'[Expected]))",
+    "format": "0.00%",
+    "definition": "Key coverage for selected dates; unaffected by market-length or price filters",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Daily Controls",
+    "measure": "Missing Settlement Periods",
+    "dax": "SUM('Daily Controls'[Missing])",
+    "format": "#,##0",
+    "definition": "Absent expected date-period keys",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Daily Controls",
+    "measure": "Duplicate Settlement Periods",
+    "dax": "SUM('Daily Controls'[Duplicates])",
+    "format": "#,##0",
+    "definition": "Duplicate date-period keys",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Daily Controls",
+    "measure": "Validation Exceptions",
+    "dax": "SUM('Daily Controls'[Exceptions])",
+    "format": "#,##0",
+    "definition": "Core validation events",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  },
+  {
+    "table": "Daily Controls",
+    "measure": "Null Values",
+    "dax": "SUM('Daily Controls'[Nulls])",
+    "format": "#,##0",
+    "definition": "Required core null values",
+    "runtime_status": "Not executed: licensed Power BI/Analysis Services environment required"
+  }
+]

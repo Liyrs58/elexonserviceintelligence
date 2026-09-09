@@ -10,15 +10,16 @@ from src.ingest.client import parse_daily
 from src.transform.settlement import transform_records
 from src.validate.controls import expected_periods,validate_records
 from src.analysis.statistics import analyse,flag_periods
+from src.validate.source_audit import audit_sources
 
 
-def run(manifest_path: Path, output: Path):
+def run(manifest_path: Path, output: Path, quality: Path | None = None):
     manifest=json.loads(manifest_path.read_text())
     if manifest['status']!='success':
         raise ValueError('Cannot analyse incomplete ingestion')
     output.mkdir(parents=True,exist_ok=True)
-    quality=output/'quality'
-    quality.mkdir(exist_ok=True)
+    quality=quality or output.parent/'quality'
+    quality.mkdir(parents=True,exist_ok=True)
     originals=[]
     for request in manifest['requests']:
         content=(manifest_path.parent/request['file']).read_bytes()
@@ -26,6 +27,8 @@ def run(manifest_path: Path, output: Path):
             raise ValueError('Raw snapshot integrity failure')
         for source in parse_daily(json.loads(content)):
             originals.append(dict(source,source_endpoint=request['url'],retrieved_at=request['retrieved_at']))
+    source_checks=audit_sources(manifest,originals)
+    pd.DataFrame(source_checks).to_csv(quality/'source_controls.csv',index=False)
     # Validate core values before transformations could coerce or hide invalid types.
     canonical=[dict(settlement_date=r.get('settlementDate'),settlement_period=r.get('settlementPeriod'),
                     start_time=r.get('startTime'),system_price=r.get('systemBuyPrice'),
@@ -39,11 +42,14 @@ def run(manifest_path: Path, output: Path):
     columns=['control','severity','settlement_date','settlement_period','detail','row_index']
     pd.DataFrame(issues,columns=columns).to_csv(quality/'exceptions.csv',index=False)
     (quality/'exceptions.json').write_text(json.dumps(issues,indent=2))
-    if issues:
+    if issues or any(c['status']=='FAIL' for c in source_checks):
         raise ValueError(f'{len(issues)} validation exceptions; inspect {quality}')
     frame=transform_records(originals)
     frame,thresholds=flag_periods(frame)
     frame['quality_status']='PASS'
+    # Deterministic bins are display groups, not exception thresholds.
+    frame['price_bin_lower']=(frame.system_price//20*20).astype(int)
+    frame['niv_bin_lower']=(frame.niv//100*100).astype(int)
     frame.to_csv(output/'settlement.csv',index=False)
     expected=[]
     day=date.fromisoformat(manifest['start_date'])
@@ -60,8 +66,19 @@ def run(manifest_path: Path, output: Path):
     daily['missing_periods']=daily.expected_periods-daily.received_periods
     daily['completeness']=daily.received_periods/daily.expected_periods
     daily['validation_exceptions']=0
+    daily['duplicate_periods']=0
+    daily['null_values']=0
+    daily['schema_exceptions']=0
     daily['retrieval_status']='Success'
     daily.to_csv(quality/'daily_controls.csv',index=False)
+    frame[['system_price','niv','absolute_niv']].describe(percentiles=[.01,.05,.25,.5,.75,.95,.99]).to_csv(output/'descriptive_statistics.csv')
+    frame.groupby('price_bin_lower').size().rename('periods').to_csv(output/'price_distribution.csv')
+    frame.groupby('niv_bin_lower').size().rename('periods').to_csv(output/'niv_distribution.csv')
+    metadata=[]
+    for field in frame.columns:
+        evidence='OBSERVED' if field in originals[0] else 'FLAG' if field in ['price_flag','imbalance_flag','is_exception','reason_flagged','severity','quality_status'] else 'DERIVED'
+        metadata.append(dict(field=field,evidence_class=evidence,definition='Original source or retrieval field' if evidence=='OBSERVED' else 'See METHODOLOGY.md and source implementation'))
+    pd.DataFrame(metadata).to_csv(output/'field_provenance.csv',index=False)
     statistics=analyse(frame)
     statistics.update(expected_records=int(dates.expected_periods.sum()),completeness=len(frame)/dates.expected_periods.sum(),
                       validation_exceptions=len(issues),start_date=manifest['start_date'],end_date=manifest['end_date'],

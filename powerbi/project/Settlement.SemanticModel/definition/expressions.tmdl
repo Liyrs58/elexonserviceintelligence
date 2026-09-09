@@ -1,0 +1,2 @@
+/// Root data folder. Change this single parameter when moving the project.
+expression DataFolder = "/Users/rudra/.codex/.chatgpt-projects/g-p-6aa1612bdac881918232925c8750ef0e/elexon-service-intelligence/data" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]

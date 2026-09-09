@@ -1,0 +1,224 @@
+/// One validated observation per Settlement Date and Period; latest DISEBSP snapshot
+table 'Settlement'
+
+	/// DERIVED: Received period count within filter context
+	measure 'Settlement Periods' = COUNTROWS('Settlement')
+		formatString: #,##0
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Arithmetic mean of period prices
+	measure 'Average System Price' = AVERAGE('Settlement'[System Price Value])
+		formatString: #,##0.00 "GBP/MWh"
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Median of period prices
+	measure 'Median System Price' = MEDIAN('Settlement'[System Price Value])
+		formatString: #,##0.00 "GBP/MWh"
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Highest period price
+	measure 'Maximum System Price' = MAX('Settlement'[System Price Value])
+		formatString: #,##0.00 "GBP/MWh"
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Lowest period price
+	measure 'Minimum System Price' = MIN('Settlement'[System Price Value])
+		formatString: #,##0.00 "GBP/MWh"
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Mean signed NIV
+	measure 'Average NIV' = AVERAGE('Settlement'[NIV Value])
+		formatString: #,##0.00 "MWh"
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Mean absolute NIV
+	measure 'Average Absolute NIV' = AVERAGE('Settlement'[Absolute NIV Value])
+		formatString: #,##0.00 "MWh"
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Largest absolute NIV
+	measure 'Maximum Absolute NIV' = MAX('Settlement'[Absolute NIV Value])
+		formatString: #,##0.00 "MWh"
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Count of positive-NIV periods
+	measure 'Short Settlement Periods' = CALCULATE([Settlement Periods], KEEPFILTERS('Settlement'[System Length] = "Short"))
+		formatString: #,##0
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Count of negative-NIV periods
+	measure 'Long Settlement Periods' = CALCULATE([Settlement Periods], KEEPFILTERS('Settlement'[System Length] = "Long"))
+		formatString: #,##0
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Period count satisfying fixed full-quarter price thresholds
+	measure 'Extreme Price Periods' = CALCULATE([Settlement Periods], KEEPFILTERS('Settlement'[Price Flag] = TRUE()))
+		formatString: #,##0
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Period count satisfying fixed full-quarter absolute-NIV threshold
+	measure 'Extreme Imbalance Periods' = CALCULATE([Settlement Periods], KEEPFILTERS('Settlement'[Imbalance Flag] = TRUE()))
+		formatString: #,##0
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Distinct periods flagged by either screening rule
+	measure 'Analytical Exceptions' = CALCULATE([Settlement Periods], KEEPFILTERS('Settlement'[Exception] = TRUE()))
+		formatString: #,##0
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// OBSERVED: Date
+	column 'Date'
+		dataType: dateTime
+		isHidden
+		summarizeBy: none
+		sourceColumn: settlement_date
+		annotation EvidenceClass = OBSERVED
+		formatString: yyyy-MM-dd
+
+	/// OBSERVED: Period
+	column 'Period'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: settlement_period
+		annotation EvidenceClass = OBSERVED
+
+	/// DERIVED: Event
+	column 'Event'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: event_id
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: GBP/MWh; source buy price after buy/sell equality check
+	column 'System Price Value'
+		dataType: double
+		isHidden
+		summarizeBy: none
+		sourceColumn: system_price
+		annotation EvidenceClass = DERIVED
+
+	/// OBSERVED: Net Imbalance Volume in MWh
+	column 'NIV Value'
+		dataType: double
+		isHidden
+		summarizeBy: none
+		sourceColumn: niv
+		annotation EvidenceClass = OBSERVED
+
+	/// DERIVED: Absolute Net Imbalance Volume in MWh
+	column 'Absolute NIV Value'
+		dataType: double
+		isHidden
+		summarizeBy: none
+		sourceColumn: absolute_niv
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Positive NIV Short, negative Long, zero Balanced
+	column 'System Length'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: system_length
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Full-quarter empirical upper rank, 0–100
+	column 'Price Percentile'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: price_percentile
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Full-quarter absolute-NIV upper rank, 0–100
+	column 'NIV Percentile'
+		dataType: double
+		summarizeBy: none
+		sourceColumn: niv_percentile
+		annotation EvidenceClass = DERIVED
+
+	/// FLAG: Price Flag
+	column 'Price Flag'
+		dataType: boolean
+		isHidden
+		summarizeBy: none
+		sourceColumn: price_flag
+		annotation EvidenceClass = FLAG
+
+	/// FLAG: Imbalance Flag
+	column 'Imbalance Flag'
+		dataType: boolean
+		isHidden
+		summarizeBy: none
+		sourceColumn: imbalance_flag
+		annotation EvidenceClass = FLAG
+
+	/// FLAG: Exception
+	column 'Exception'
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: is_exception
+		annotation EvidenceClass = FLAG
+
+	/// FLAG: Reason
+	column 'Reason'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: reason_flagged
+		annotation EvidenceClass = FLAG
+
+	/// FLAG: Analytical review priority, not operational incident severity
+	column 'Severity'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: severity
+		annotation EvidenceClass = FLAG
+
+	/// FLAG: Quality Status
+	column 'Quality Status'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: quality_status
+		annotation EvidenceClass = FLAG
+
+	/// DERIVED: Lower edge of 20 GBP/MWh bin
+	column 'Price Bin'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: price_bin_lower
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Lower edge of 100 MWh bin
+	column 'NIV Bin'
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: niv_bin_lower
+		annotation EvidenceClass = DERIVED
+
+	/// OBSERVED: Retrieval UTC
+	column 'Retrieval UTC'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: retrieved_at
+		annotation EvidenceClass = OBSERVED
+
+	partition 'Settlement' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents(DataFolder & "/processed/settlement.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"settlement_date", type date}, {"settlement_period", Int64.Type}, {"event_id", type text}, {"system_price", type number}, {"niv", type number}, {"absolute_niv", type number}, {"system_length", type text}, {"price_percentile", type number}, {"niv_percentile", type number}, {"price_flag", type logical}, {"imbalance_flag", type logical}, {"is_exception", type logical}, {"reason_flagged", type text}, {"severity", type text}, {"quality_status", type text}, {"price_bin_lower", Int64.Type}, {"niv_bin_lower", Int64.Type}, {"retrieved_at", type text}}, "en-GB")
+			in
+				Typed

@@ -1,0 +1,19 @@
+relationship 'Settlement to Date'
+	fromColumn: 'Settlement'.Date
+	toColumn: 'Date'.Date
+	crossFilteringBehavior: oneDirection
+
+relationship 'Daily Controls to Date'
+	fromColumn: 'Daily Controls'.Date
+	toColumn: 'Date'.Date
+	crossFilteringBehavior: oneDirection
+
+relationship 'Investigation to Date'
+	fromColumn: 'Investigation'.Date
+	toColumn: 'Date'.Date
+	crossFilteringBehavior: oneDirection
+
+relationship 'Settlement to Period'
+	fromColumn: 'Settlement'.Period
+	toColumn: 'Settlement Period'.Period
+	crossFilteringBehavior: oneDirection

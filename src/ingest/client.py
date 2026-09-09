@@ -77,9 +77,22 @@ def fetch_window(start_date: str, end_date: str, raw_root: Path) -> Path:
                 entry.update(records=len(rows),status='success',source_fields=sorted(rows[0]))
             except (requests.RequestException,ValueError) as error:
                 entry.update(status='failed',error=str(error))
+                failed_response=getattr(error,'response',None)
+                if failed_response is not None:
+                    filename=f'{day}-error-response.bin'
+                    write_new(snapshot/filename,failed_response.content)
+                    entry.update(file=filename,http_status=failed_response.status_code,
+                                 sha256=hashlib.sha256(failed_response.content).hexdigest())
                 failed=True
+            except KeyboardInterrupt:
+                entry.update(status='interrupted',elapsed_seconds=round(time.monotonic()-began,3))
+                manifest['requests'].append(entry)
+                manifest.update(status='interrupted',finished_at=datetime.now(timezone.utc).isoformat())
+                write_new(snapshot/'manifest.json',json.dumps(manifest,indent=2).encode())
+                raise
             entry['elapsed_seconds']=round(time.monotonic()-began,3)
             manifest['requests'].append(entry)
+            write_new(snapshot/f'{day}-receipt.json',json.dumps(entry,indent=2).encode())
             LOG.info('%s %s %s',day,entry['status'],entry.get('records',''))
             day+=timedelta(days=1)
     manifest['status']='failed' if failed else 'success'

@@ -7,10 +7,12 @@ Build, verify and package the full GB Settlement & Imbalance Service Intelligenc
 Preserved full specification. Official domain/API/benchmark research saved. Implemented ingestion, calendar controls, transformation, percentile screening, SQL, investigation retrieval and price reconciliation. Current meaningful suite: 20 tests pass. Downloaded Q4 2025: all 92 requests succeeded, 4,418 expected/received periods, no core quality exceptions. Python/SQL key aggregates agree within 1e-8. Retrieved and reconciled official summary and both stacks for three selected cases.
 
 ## Current work
-Data pipeline hardening, report/model design and artifact production. Full brief remains active; project is NOT complete.
+Source controls and semantic model implemented; report design and artifact production now next. Full brief remains active; project is NOT complete.
 
 ## Outstanding work
-Harden interrupted retrieval audit, schema drift and source-time/freshness controls. Add field provenance metadata and full descriptive distributions. Finish deeper narrative interpretation. Build four-page PBIP/PBIR semantic model/report using official CLI and skill references. Produce one-page PDF insight note, eight-slide editable/PDF presentation, genuine report screenshots if runtime available, README, claim/requirement audit and final interview outputs. Clean-state reretrieval/rebuild and meaningful independent QA remain. Do not label mock renderings as Power BI screenshots or local DAX definitions as executed measures.
+Finish report design and four-page PBIR report. Semantic model definitions now exist but are unverified in a model engine. Produce one-page PDF insight note, eight-slide editable/PDF presentation, genuine report screenshots if runtime available, README, claim/requirement audit and final interview outputs. Clean-state reretrieval/rebuild and meaningful independent QA remain. Do not label mock renderings as Power BI screenshots or local DAX definitions as executed measures.
+
+Additional completed work: source schema signatures, source UTC/creation/retrieval controls, explicit 30-day snapshot review policy; all pass current data. 23 meaningful tests pass, including interrupted-retrieval manifest persistence. CSV distributions/descriptive percentiles and field provenance generated. Quality outputs standardised to data/quality. powerbi/build_model.mjs generates six tables, four relationships and 19 explicit measures. src/analysis/investigation_queue.py expands all130 flagged cases, three reviewed, remainder Level1 only. No report pages yet.
 
 ## Findings and decisions
 Q4 2025 statistics: mean price 75.7241020665 GBP/MWh; median74.705; max487; min−30; max|NIV|1563.3382684622MWh; short2076 long2340 balanced2; negative prices151. 130 distinct flagged periods (92 price,45 imbalance,7 overlap). Thresholds price≤−11.22 or ≥153.8997; |NIV|≥876.0417274123. Full-window retrospective, inclusive ties, not BSC/SLA thresholds.
@@ -23,7 +25,7 @@ Power BI browser works (in-app browser through CUA), but app.powerbi.com display
 Initial sandbox Python retrieval failed DNS and was interrupted; an empty incomplete raw directory may remain. Escalated public retrieval succeeded. No live process remains from ingestion/investigation.
 
 ## Important paths
-PROJECT_SPEC.md: full brief. research/: discovery evidence. .tools/ and .venv/: ignored dependencies. Main snapshot data/raw/20260909T163243Z-dc4f225d/manifest.json. Context snapshot data/raw/20260909T163543Z-context-afc7db2e/manifest.json. Canonical results data/processed/summary.json, thresholds.json, settlement.csv/parquet, investigations.json/csv and price_reconciliation.csv. Controls currently data/processed/quality/; user-requested data/quality path still needs standardisation. SQL sql/analysis.sql.
+PROJECT_SPEC.md: full brief. research/: discovery evidence. .tools/ and .venv/: ignored dependencies. Main snapshot data/raw/20260909T163243Z-dc4f225d/manifest.json. Context snapshot data/raw/20260909T163543Z-context-afc7db2e/manifest.json. Canonical results data/processed/summary.json, thresholds.json, settlement.csv/parquet, investigations.json/csv and price_reconciliation.csv. Controls now data/quality/; old data/processed/quality/ outputs are obsolete leftovers. SQL sql/analysis.sql. Model powerbi/project/Settlement.SemanticModel/definition; measure catalog powerbi/measure-catalog.json explicitly labels runtime unverified.
 
 ## Exact inspection commands
 `git status --short`
@@ -34,8 +36,12 @@ PROJECT_SPEC.md: full brief. research/: discovery evidence. .tools/ and .venv/: 
 `.venv/bin/python -m src.pipeline --manifest data/raw/20260909T163243Z-dc4f225d/manifest.json`
 `.venv/bin/python -m src.analysis.investigate`
 `.venv/bin/python -m src.analysis.reconcile`
+`.venv/bin/python -m src.analysis.investigation_queue`
+`node powerbi/build_model.mjs`
 
 Fetch commands need external network permission in this sandbox. Each fetch creates a new immutable snapshot. Rebuild uses named manifest. Investigation retrieval currently selects three cases and reconciliation reads saved context.
 
 ## Next action
 Finish remaining data controls, then author semantic model and four report pages. Main agent has read semantic-model-authoring (complete across calls), report-design and report-authoring SKILL.md plus modeling-guidelines, TMDL, PBIP, DAX references. Read required design/archetype/authoring reference files before implementation. Presentation SKILL.md was partly truncated; reread remaining content and mandatory implementation/quickstart/finalization references before authoring. PDF skill read. Runtime paths from load_workspace_dependencies are available. No slides/PDF/report currently exists.
+
+Report reference-reading progress: authoring.md, expressions.md, textbox.md, formatting-overview.md, table.md, card.md, visual-cookbook.md, chart-selection.md and analytical-canvas archetype fully read. operational-monitor and narrative-story main bodies read across earlier output. layout/design-brief combined read had a small truncation around boundary; reread relevant missing portion. Cartesian reference1497 lines was truncated: selected introductory/last examples read, middle needs reading if used. Slicers502 lines, formatting469 lines, theming/base-theme, accessibility/anti-patterns and preflight references still needed for their applicable authoring operations. User overrides decorative gradients/curved-smoothed charts and unnecessary requirements interviews. Official CLI is available locally; inspect capabilities before creating visuals.

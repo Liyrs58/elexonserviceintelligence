@@ -1,0 +1,121 @@
+/// Daily control fact; one row per Settlement Day. Market filters intentionally do not affect denominator
+table 'Daily Controls'
+
+	/// DERIVED: Key coverage for selected dates; unaffected by market-length or price filters
+	measure 'Data Completeness %' = DIVIDE(SUM('Daily Controls'[Received]), SUM('Daily Controls'[Expected]))
+		formatString: 0.00%
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Absent expected date-period keys
+	measure 'Missing Settlement Periods' = SUM('Daily Controls'[Missing])
+		formatString: #,##0
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Duplicate date-period keys
+	measure 'Duplicate Settlement Periods' = SUM('Daily Controls'[Duplicates])
+		formatString: #,##0
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Core validation events
+	measure 'Validation Exceptions' = SUM('Daily Controls'[Exceptions])
+		formatString: #,##0
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Required core null values
+	measure 'Null Values' = SUM('Daily Controls'[Nulls])
+		formatString: #,##0
+		displayFolder: Monitor
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Date
+	column 'Date'
+		dataType: dateTime
+		isHidden
+		summarizeBy: none
+		sourceColumn: settlement_date
+		annotation EvidenceClass = DERIVED
+		formatString: yyyy-MM-dd
+
+	/// DERIVED: Expected
+	column 'Expected'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: expected_periods
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Received
+	column 'Received'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: received_periods
+		annotation EvidenceClass = DERIVED
+
+	/// FLAG: Missing
+	column 'Missing'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: missing_periods
+		annotation EvidenceClass = FLAG
+
+	/// FLAG: Duplicates
+	column 'Duplicates'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: duplicate_periods
+		annotation EvidenceClass = FLAG
+
+	/// FLAG: Nulls
+	column 'Nulls'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: null_values
+		annotation EvidenceClass = FLAG
+
+	/// FLAG: Schema Exceptions
+	column 'Schema Exceptions'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: schema_exceptions
+		annotation EvidenceClass = FLAG
+
+	/// FLAG: Exceptions
+	column 'Exceptions'
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: validation_exceptions
+		annotation EvidenceClass = FLAG
+
+	/// OBSERVED: Retrieval Status
+	column 'Retrieval Status'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: retrieval_status
+		annotation EvidenceClass = OBSERVED
+
+	/// DERIVED: Clock Change
+	column 'Clock Change'
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: clock_change
+		annotation EvidenceClass = DERIVED
+
+	partition 'Daily Controls' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents(DataFolder & "/quality/daily_controls.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"settlement_date", type date}, {"expected_periods", Int64.Type}, {"received_periods", Int64.Type}, {"missing_periods", Int64.Type}, {"duplicate_periods", Int64.Type}, {"null_values", Int64.Type}, {"schema_exceptions", Int64.Type}, {"validation_exceptions", Int64.Type}, {"retrieval_status", type text}, {"clock_change", type logical}}, "en-GB")
+			in
+				Typed

@@ -1,0 +1,84 @@
+/// One record per flagged period. Three reviewed cases contain retrieved price-stack evidence
+table 'Investigation'
+
+	/// OBSERVED: Date
+	column 'Date'
+		dataType: dateTime
+		isHidden
+		summarizeBy: none
+		sourceColumn: settlement_date
+		annotation EvidenceClass = OBSERVED
+		formatString: yyyy-MM-dd
+
+	/// DERIVED: Event
+	column 'Event'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: event_id
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: What Happened
+	column 'What Happened'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: what_happened
+		annotation EvidenceClass = DERIVED
+
+	/// FLAG: Why Flagged
+	column 'Why Flagged'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: reason_flagged
+		annotation EvidenceClass = FLAG
+
+	/// FLAG: Data Quality
+	column 'Data Quality'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: quality_control_result
+		annotation EvidenceClass = FLAG
+
+	/// DERIVED: Known
+	column 'Known'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: known
+		annotation EvidenceClass = DERIVED
+
+	/// HYPOTHESIS: Not Established
+	column 'Not Established'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: not_established
+		annotation EvidenceClass = HYPOTHESIS
+
+	/// HYPOTHESIS: Hypotheses
+	column 'Hypotheses'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: hypotheses
+		annotation EvidenceClass = HYPOTHESIS
+
+	/// DERIVED: Next Checks
+	column 'Next Checks'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: recommended_next_checks
+		annotation EvidenceClass = DERIVED
+
+	/// DERIVED: Investigation Status
+	column 'Investigation Status'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: investigation_status
+		annotation EvidenceClass = DERIVED
+
+	partition 'Investigation' = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents(DataFolder & "/processed/investigation_queue.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				Typed = Table.TransformColumnTypes(Headers, {{"settlement_date", type date}, {"event_id", type text}, {"what_happened", type text}, {"reason_flagged", type text}, {"quality_control_result", type text}, {"known", type text}, {"not_established", type text}, {"hypotheses", type text}, {"recommended_next_checks", type text}, {"investigation_status", type text}}, "en-GB")
+			in
+				Typed

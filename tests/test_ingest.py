@@ -2,6 +2,8 @@ from unittest.mock import Mock
 import pytest
 import requests
 from src.ingest.client import get_response,parse_daily,write_new
+from src.ingest.client import fetch_window
+import json
 
 
 def test_envelope_fails_closed():
@@ -40,3 +42,12 @@ def test_raw_file_cannot_be_overwritten(tmp_path):
     write_new(path,b'original')
     with pytest.raises(FileExistsError):write_new(path,b'changed')
     assert path.read_bytes()==b'original'
+
+
+def test_interruption_preserves_manifest(monkeypatch,tmp_path):
+    def interrupted(*args,**kwargs):raise KeyboardInterrupt()
+    monkeypatch.setattr('src.ingest.client.get_response',interrupted)
+    with pytest.raises(KeyboardInterrupt):fetch_window('2025-01-01','2025-01-01',tmp_path)
+    manifest=json.loads(next(tmp_path.glob('*/manifest.json')).read_text())
+    assert manifest['status']=='interrupted'
+    assert manifest['requests'][0]['status']=='interrupted'
