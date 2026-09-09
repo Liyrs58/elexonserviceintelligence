@@ -85,8 +85,8 @@ table 'Settlement'
 		isHidden
 		summarizeBy: none
 		sourceColumn: settlement_date
-		annotation EvidenceClass = OBSERVED
 		formatString: yyyy-MM-dd
+		annotation EvidenceClass = OBSERVED
 
 	/// OBSERVED: Period
 	column 'Period'

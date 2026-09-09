@@ -7,8 +7,8 @@ table 'Investigation'
 		isHidden
 		summarizeBy: none
 		sourceColumn: settlement_date
-		annotation EvidenceClass = OBSERVED
 		formatString: yyyy-MM-dd
+		annotation EvidenceClass = OBSERVED
 
 	/// DERIVED: Event
 	column 'Event'

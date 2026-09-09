@@ -22,7 +22,7 @@ Three detailed cases cover maximum price, minimum price and maximum absolute NIV
 ## Delivered artifacts
 
 - Power BI project: `powerbi/project/Settlement.pbip`, with six semantic-model tables, four single-direction relationships, 19 explicit measures and four report pages containing 39 data-bound visuals.
-- Official Microsoft report-authoring validation: zero errors and zero warnings. Static field bindings, metadata and schemas pass; the result does not execute M or DAX.
+- Official Microsoft report-authoring validation: zero errors and zero warnings. The official Modeling MCP also imports the TMDL folder successfully and returns all 19 measures in ready state. This final gate found and prompted correction of invalid generated date-column property sequencing. These checks prove parsable definitions and bindings; they do not execute M or DAX.
 - One-page service note: `reports/service-insight-note.pdf`, with source builder and visual QA.
 - Eight-slide editable presentation: `reports/presentation/settlement-service-intelligence.pptx`, plus reviewed PDF export. Package, geometry, font, first-party reimport and native-chart checks pass.
 - Reviewer records: `reports/reproducibility-qa.md`, `reports/powerbi-definition-qa.md`, `reports/insight-note-qa.md`, `reports/presentation-qa.md`, `reports/source-link-qa.md`, `reports/claim-audit.md` and `reports/requirements-audit.md`.
@@ -30,7 +30,7 @@ Three detailed cases cover maximum price, minimum price and maximum absolute NIV
 
 ## Remaining external gate
 
-Power BI Desktop is unavailable natively on this Mac. The in-app browser reaches Power BI Service but is at Microsoft sign-in, and the available Fabric identity returned `UserNotLicensed`. Consequently M refresh, actual DAX results, slicer/filter interactions, rendered visual accessibility/clipping, empty states, performance and genuine report screenshots are unverified.
+Power BI Desktop is unavailable natively on this Mac. The in-app browser previously reached Power BI Service but was at Microsoft sign-in, the browser-control service was unavailable on the final continuation, and the available Fabric identity returned `UserNotLicensed`. The Modeling MCP connection is offline and rejects DAX query execution. Consequently M refresh, actual DAX results, slicer/filter interactions, rendered visual accessibility/clipping, empty states, performance and genuine report screenshots are unverified.
 
 The smallest close is to open `powerbi/project/Settlement.pbip` in a licensed Power BI Desktop environment, set `DataFolder` to this project's `data` directory, refresh, compare all 19 measures with `powerbi/measure-catalog.json` and the Python/SQL outputs, test interactions and capture all four pages. A licensed Fabric workspace with a supported route to the local files is the alternative. Do not claim runtime verification or use a dashboard screenshot until this passes.
 

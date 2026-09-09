@@ -21,9 +21,13 @@ function table(name,file,columns,measures=[],description=''){
     catalog.push({table:name,measure:title,dax,format,definition:explanation,runtime_status:'Not executed: licensed Power BI/Analysis Services environment required'});
   }
   for(const [title,source,type,hidden=false,evidence='OBSERVED',description=title] of columns){
-    text+=`\n\t/// ${evidence}: ${description}\n\tcolumn ${quote(title)}\n\t\tdataType: ${type}\n${hidden?'\t\tisHidden\n':''}\t\tsummarizeBy: none\n\t\tsourceColumn: ${source}\n\t\tannotation EvidenceClass = ${evidence}\n`;
+    text+=`\n\t/// ${evidence}: ${description}\n\tcolumn ${quote(title)}\n\t\tdataType: ${type}\n${hidden?'\t\tisHidden\n':''}\t\tsummarizeBy: none\n\t\tsourceColumn: ${source}\n`;
+    // TMDL annotations terminate the column's ordinary property sequence.
+    // Emit format/sort properties before annotations so the folder parser can
+    // import the generated model, not merely accept the text as JSON-adjacent.
     if(type==='dateTime')text+='\t\tformatString: yyyy-MM-dd\n';
     if(name==='Date' && title==='Month')text+="\t\tsortByColumn: 'Month Number'\n";
+    text+=`\t\tannotation EvidenceClass = ${evidence}\n`;
   }
   const types={string:'type text',int64:'Int64.Type',double:'type number',decimal:'Currency.Type',boolean:'type logical',dateTime:'type date'};
   const conversions=columns.map(c=>`{"${c[1]}", ${types[c[2]]}}`).join(', ');

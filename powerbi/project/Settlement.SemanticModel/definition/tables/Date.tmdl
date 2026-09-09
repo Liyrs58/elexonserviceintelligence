@@ -13,8 +13,8 @@ table 'Date'
 		dataType: dateTime
 		summarizeBy: none
 		sourceColumn: settlement_date
-		annotation EvidenceClass = DERIVED
 		formatString: yyyy-MM-dd
+		annotation EvidenceClass = DERIVED
 
 	/// DERIVED: UTC elapsed time between London midnights / 30 minutes
 	column 'Expected Periods'
@@ -43,8 +43,8 @@ table 'Date'
 		dataType: string
 		summarizeBy: none
 		sourceColumn: month_name
-		annotation EvidenceClass = OBSERVED
 		sortByColumn: 'Month Number'
+		annotation EvidenceClass = OBSERVED
 
 	/// OBSERVED: Weekday
 	column 'Weekday'

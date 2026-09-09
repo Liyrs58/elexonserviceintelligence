@@ -18,3 +18,4 @@
 - Do not substitute a mock dashboard image for the unavailable Power BI render. The README names the screenshot gap explicitly.
 - Package a one-page service insight note and an eight-slide editable presentation. Keep the presentation's evidence chart and core evidence grids native and editable; export a reviewed PDF for stable reading.
 - Treat the official Microsoft report validator's zero-error result as structural evidence only. M refresh, DAX results, slicer behaviour, rendered accessibility and performance require the licensed runtime gate.
+- Treat official Modeling MCP folder import as a required semantic-model parse gate. It found invalid generated date-column property sequencing that the PBIR validator did not cover; correct the generator, regenerate, and require a successful six-table/19-measure/four-relationship import before delivery.

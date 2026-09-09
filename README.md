@@ -6,7 +6,7 @@ An independent operational analytics project using public Elexon data to validat
 
 Q4 2025 · 4,418 validated Settlement Periods · 130 analytical exceptions · three detailed price investigations
 
-**Delivery status:** the reproducible Python/SQL analysis is verified. Four Power BI report pages and a semantic model have been authored locally; live DAX, filtering and visual verification remain pending a licensed Power BI environment. A genuine dashboard hero screenshot belongs here after that verification. No mock image is presented as a Power BI screenshot.
+**Delivery status:** the reproducible Python/SQL analysis is verified. Four Power BI report pages pass Microsoft's report validator, and the semantic model imports successfully through Microsoft's Modeling MCP with all 19 measures in ready state. Live DAX, filtering and visual verification remain pending a licensed Power BI environment. A genuine dashboard hero screenshot belongs here after that verification. No mock image is presented as a Power BI screenshot.
 
 ## The problem
 
@@ -64,7 +64,7 @@ The semantic model has Date and Settlement Period dimensions, Settlement and Dai
 | Exception Investigation | What happened, what is known, what is not established and what should be checked next? |
 | Data Quality & Controls | Can the selected snapshot be trusted, including retrieval and clock-change coverage? |
 
-`powerbi/project/Settlement.pbip` is the entry point. The DataFolder parameter must point to this project's `data` directory on the machine performing refresh. Local files require an appropriate Desktop or gateway-supported service route. The checked-in definitions are not a published report or proof that measures execute. Genuine screenshots, interaction checks and runtime performance evidence remain pending; current authenticated Fabric discovery returned `UserNotLicensed`.
+`powerbi/project/Settlement.pbip` is the entry point. The DataFolder parameter must point to this project's `data` directory on the machine performing refresh. Local files require an appropriate Desktop or gateway-supported service route. The checked-in definitions parse through the official Modeling MCP but are not a published report or proof that measures execute. Genuine screenshots, interaction checks and runtime performance evidence remain pending; current authenticated Fabric discovery returned `UserNotLicensed`.
 
 ## Deliverables and reviewer documents
 

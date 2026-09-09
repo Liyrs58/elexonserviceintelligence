@@ -18,7 +18,7 @@ Reviewed 9 September 2026 across README, METHODOLOGY, Power BI definitions, insi
 | 13 October SP26 price 487 and NIV +184.9225 | OBSERVED | hash-verified DISEBSP response and retained source fields |
 | Three retained offer rows reconstruct £487/MWh; all three selected cases reconcile | DERIVED | hash-verified summary/stacks and `price_reconciliation.csv` |
 | Two fresh daily snapshots match 92/92 response hashes and analytical outputs | SUPPORTED | `reports/reproducibility-qa.md` and isolated rebuild |
-| Four PBIR pages, 39 visuals, six model tables and 19 measures exist | SUPPORTED | official CLI inventory and current PBIP/TMDL files |
+| Four PBIR pages, 39 visuals, six model tables and 19 ready-state measures exist | SUPPORTED | official CLI inventory, Modeling MCP parse and current PBIP/TMDL files |
 | Insight note is one reviewed page; presentation is eight reviewed pages/slides | SUPPORTED | rendered PDFs, presentation finalizer and PNG inspection records |
 
 ## Domain claims

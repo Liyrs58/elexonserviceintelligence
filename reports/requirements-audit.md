@@ -17,9 +17,9 @@ Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: partia
 | Price/balancing evidence | PASS | three hash-verified summary/bid/offer cases and penny reconciliations |
 | SQL analytical work | PASS | rankings, summaries, exception selection and duplicate checks |
 | Python engineering and tests | PASS | modular pipeline, fail-closed run marker and 38 passing tests |
-| Semantic-model definition | STATIC PASS | star-style six-table TMDL, four relationships, 19 measures; engine execution pending |
+| Semantic-model definition | OFFLINE MODEL PASS | official Modeling MCP parses six tables, four relationships and 19 ready-state measures; engine execution pending |
 | Four Power BI pages | STATIC PASS | 39 data-bound PBIR visuals and zero validator diagnostics; live rendering pending |
-| Power BI cross-system checks | PARTIAL | Python/DuckDB intended results agree; DAX has not executed |
+| Power BI cross-system checks | PARTIAL | Modeling MCP binds all measures in ready state and Python/DuckDB intended results agree; DAX has not executed |
 | Power BI accessibility/interactions/performance | PENDING | requires licensed Desktop/Fabric refresh and rendering |
 | Genuine Power BI screenshots / README hero | PENDING | deliberately omitted rather than fabricated |
 | METHODOLOGY, README, decisions/state and reproduction docs | PASS | reviewer documents present and audited |
@@ -38,7 +38,7 @@ Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: partia
 3. Automated tests: **PASS**, 38 passed.
 4. SQL analysis: **PASS**, executed within the pipeline.
 5. Material-statistic cross-check: **PASS**, Python/DuckDB tolerance 1e-8.
-6. Power BI measure verification: **PENDING**, definitions only; intended results independently checked.
+6. Power BI measure verification: **PARTIAL**, all definitions parse and bind in the official Modeling MCP and intended results are independently checked; DAX values have not executed.
 7. Four Power BI pages visually inspected: **PENDING**, no licensed rendering.
 8. Filters/slicers/interactions: **PENDING**, no licensed rendering.
 9. Power BI performance: **PENDING**, no licensed rendering.

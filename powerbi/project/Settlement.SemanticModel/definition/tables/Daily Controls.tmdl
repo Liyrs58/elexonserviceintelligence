@@ -37,8 +37,8 @@ table 'Daily Controls'
 		isHidden
 		summarizeBy: none
 		sourceColumn: settlement_date
-		annotation EvidenceClass = DERIVED
 		formatString: yyyy-MM-dd
+		annotation EvidenceClass = DERIVED
 
 	/// DERIVED: Expected
 	column 'Expected'
