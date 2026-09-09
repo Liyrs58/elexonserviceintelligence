@@ -1,6 +1,6 @@
 # Requirements and final-QA audit
 
-Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: partially blocked by the licensed Power BI runtime gate; all unaffected deliverables are complete.**
+Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: BLOCKED by the licensed Power BI runtime/access gate after three consecutive revalidations; all unaffected deliverables are complete.**
 
 ## Requirement coverage
 
@@ -56,3 +56,5 @@ Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: partia
 ## Completion blocker
 
 The smallest close is to follow `reports/powerbi-live-verification-checklist.md`: open `powerbi/project/Settlement.pbip` in a licensed Power BI Desktop environment, set `DataFolder`, refresh, compare all 19 measures with the recorded expected values, test slicers/interactions, inspect performance and capture all four pages. A licensed Fabric workspace with a supported local-file data route is the alternative. Current Azure Fabric discovery returned `UserNotLicensed`; the last visible Power BI Service state was at sign-in and the browser-control service was unavailable on the final continuation.
+
+The same condition was revalidated on three consecutive goal turns. The latest checks found zero local Power BI Desktop/Analysis Services instances, exactly one offline Modeling MCP folder connection and another browser-controller startup failure after reset. Completion now requires user-provided licensed runtime access; no supported local fallback can prove the missing execution and rendering requirements.

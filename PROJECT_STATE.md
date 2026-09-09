@@ -2,7 +2,7 @@
 
 ## Objective and status
 
-Finish, verify and package the GB Settlement & Imbalance Service Intelligence Monitor in `PROJECT_SPEC.md` without rebuilding completed work. As of 9 September 2026, all work that can be verified on this Mac is complete. Final completion is **partially blocked** by the licensed Power BI runtime gate described below.
+Finish, verify and package the GB Settlement & Imbalance Service Intelligence Monitor in `PROJECT_SPEC.md` without rebuilding completed work. As of 9 September 2026, all work that can be verified on this Mac is complete. Final completion is **BLOCKED by an external licensed Power BI runtime/access gate** described below; it must not be reported as fully complete.
 
 ## Verified analytical package
 
@@ -33,7 +33,15 @@ Three detailed cases cover maximum price, minimum price and maximum absolute NIV
 
 Power BI Desktop is unavailable natively on this Mac. The in-app browser previously reached Power BI Service but was at Microsoft sign-in, the browser-control service was unavailable on the final continuation, and the available Fabric identity returned `UserNotLicensed`. The Modeling MCP connection is offline and rejects DAX query execution. Consequently M refresh, actual DAX results, slicer/filter interactions, rendered visual accessibility/clipping, empty states, performance and genuine report screenshots are unverified.
 
-The smallest close is to open `powerbi/project/Settlement.pbip` in a licensed Power BI Desktop environment, set `DataFolder` to this project's `data` directory, refresh, compare all 19 measures with `powerbi/measure-catalog.json` and the Python/SQL outputs, test interactions and capture all four pages. A licensed Fabric workspace with a supported route to the local files is the alternative. Do not claim runtime verification or use a dashboard screenshot until this passes.
+This blocker was independently revalidated across three consecutive goal turns:
+
+1. Power BI Service required Microsoft sign-in, Fabric discovery returned `UserNotLicensed`, and no native Desktop runtime existed on macOS.
+2. A fresh browser-controller restart failed; Modeling MCP exposed only an offline folder connection, rejected DAX execution, and found zero local runtime instances.
+3. A second fresh browser-controller restart again failed; Modeling MCP again found zero local Power BI Desktop/Analysis Services instances and only the offline `Settlement` connection.
+
+No supported local action remains that can execute or render the report without credentials, a licence and an external runtime. Do not acquire a trial, bypass authentication, publish externally or substitute another calculation engine as Power BI evidence.
+
+The smallest close is for the user to provide a licensed Windows Power BI Desktop environment with this repository available, or sign into a licensed Fabric workspace that supports the local-file model, then ask the agent to continue. Follow `reports/powerbi-live-verification-checklist.md`: set `DataFolder`, refresh, compare all 19 measures, test interactions, inspect performance and capture all four pages. Do not claim runtime verification or use a dashboard screenshot until this passes.
 
 GitHub publishing was not authorised and was not attempted. CV bullets and interview answers remain deferred under `PROJECT_SPEC.md` until live Power BI verification completes.
 
