@@ -22,7 +22,10 @@ Thumbs.db
 # Local tooling clones and package caches
 .tools/
 node_modules/
+node_modules
 npm-debug.log*
+.agents/
+.chart-data-*/
 
 # Data and generated artifacts (keep directory placeholders)
 data/raw/*
@@ -33,6 +36,11 @@ data/quality/*
 !data/quality/.gitkeep
 reports/*
 !reports/.gitkeep
+!reports/*.md
+!reports/service-insight-note.pdf
+!reports/presentation/
+!reports/presentation/*.pptx
+!reports/presentation/*.pdf
 screenshots/*
 !screenshots/.gitkeep
 

@@ -17,5 +17,10 @@ Sources retrieved 9 September 2026. Research details and retrieval limitations a
 | B1 | https://github.com/lptva/gb-power-dashboard | Provenance/methodology benchmark only, no copied code or market definitions |
 | B2 | https://github.com/andrewlyden/PyPSA-GB | Reproducible configuration/source distinction benchmark only |
 | M1 | https://github.com/microsoft/skills-for-fabric | Official semantic-model and report authoring/design guidance |
+| T1 | https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html | Data-frame transformations, quantiles and rank calculations |
+| T2 | https://duckdb.org/docs/stable/clients/python/overview | In-memory SQL execution and dataframe integration |
+| T3 | https://requests.readthedocs.io/en/latest/user/quickstart/ | HTTP response, JSON, timeout and error-handling behaviour |
+| T4 | https://docs.pytest.org/en/stable/contents.html | Automated test framework reference |
+| T5 | https://www.reportlab.com/docs/reportlab-userguide.pdf | Programmatic PDF generation reference |
 
 Every numerical project result derives from the manifest-named raw snapshot, then src/pipeline.py and sql/analysis.sql. Statistics are derived, source records observed, thresholds flags, and untested explanations hypotheses.

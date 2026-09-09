@@ -1,0 +1,1517 @@
+{
+  "generated_by": "powerbi-report-design",
+  "contract_version": 1,
+  "mode": "greenfield",
+  "design_identity": {
+    "tone": "Restrained operational analysis",
+    "signature": "Source/status band and explicit evidence labels"
+  },
+  "color_map": {
+    "System Price": "#155E75",
+    "NIV": "#80512B"
+  },
+  "pages": [
+    {
+      "name": "Settlement Service Monitor",
+      "archetype": "Operational",
+      "layout_variant": "A",
+      "variant_rationale": "Desk-based review combines data status, aligned time views and a visible exception queue.",
+      "layout_contract": {
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "margin": 32,
+          "gutter": 24,
+          "snap": 8
+        },
+        "placements": [
+          {
+            "id": "page_title",
+            "kind": "textbox",
+            "text": "Settlement Service Monitor",
+            "position": [
+              32,
+              24,
+              1120,
+              56
+            ],
+            "field_bindings": {},
+            "purpose": "Settlement Service Monitor"
+          },
+          {
+            "id": "scope",
+            "kind": "textbox",
+            "text": "Q4 2025 | Historical snapshot | Independent portfolio project",
+            "position": [
+              32,
+              88,
+              1120,
+              32
+            ],
+            "field_bindings": {},
+            "purpose": "Q4 2025 | Historical snapshot | Independent portfolio project"
+          },
+          {
+            "id": "dates",
+            "kind": "slicer",
+            "text": "Date",
+            "position": [
+              1448,
+              24,
+              440,
+              88
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Date"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "queryRef": "Date.Date",
+                  "nativeQueryRef": "Date"
+                }
+              ]
+            },
+            "purpose": "Date"
+          },
+          {
+            "id": "status",
+            "kind": "cardVisual",
+            "text": "",
+            "position": [
+              32,
+              144,
+              1856,
+              160
+            ],
+            "field_bindings": {
+              "Data": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Settlement Periods"
+                    }
+                  },
+                  "queryRef": "Settlement.Settlement Periods",
+                  "nativeQueryRef": "Settlement Periods"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Daily Controls"
+                        }
+                      },
+                      "Property": "Data Completeness %"
+                    }
+                  },
+                  "queryRef": "Daily Controls.Data Completeness %",
+                  "nativeQueryRef": "Data Completeness %"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Analytical Exceptions"
+                    }
+                  },
+                  "queryRef": "Settlement.Analytical Exceptions",
+                  "nativeQueryRef": "Analytical Exceptions"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Daily Controls"
+                        }
+                      },
+                      "Property": "Validation Exceptions"
+                    }
+                  },
+                  "queryRef": "Daily Controls.Validation Exceptions",
+                  "nativeQueryRef": "Validation Exceptions"
+                }
+              ]
+            },
+            "purpose": ""
+          },
+          {
+            "id": "prices",
+            "kind": "lineChart",
+            "text": "Daily average System Price | GBP/MWh",
+            "position": [
+              32,
+              328,
+              1040,
+              320
+            ],
+            "field_bindings": {
+              "Category": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Date"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "queryRef": "Date.Date",
+                  "nativeQueryRef": "Date"
+                }
+              ],
+              "Y": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Average System Price"
+                    }
+                  },
+                  "queryRef": "Settlement.Average System Price",
+                  "nativeQueryRef": "Average System Price"
+                }
+              ]
+            },
+            "purpose": "Daily average System Price | GBP/MWh"
+          },
+          {
+            "id": "niv",
+            "kind": "lineChart",
+            "text": "Daily average signed NIV | MWh",
+            "position": [
+              32,
+              672,
+              1040,
+              320
+            ],
+            "field_bindings": {
+              "Category": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Date"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "queryRef": "Date.Date",
+                  "nativeQueryRef": "Date"
+                }
+              ],
+              "Y": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Average NIV"
+                    }
+                  },
+                  "queryRef": "Settlement.Average NIV",
+                  "nativeQueryRef": "Average NIV"
+                }
+              ]
+            },
+            "purpose": "Daily average signed NIV | MWh"
+          },
+          {
+            "id": "queue",
+            "kind": "tableEx",
+            "text": "Analytical exception queue | select a period for context",
+            "position": [
+              1096,
+              328,
+              792,
+              664
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Event"
+                    }
+                  },
+                  "queryRef": "Settlement.Event",
+                  "nativeQueryRef": "Event"
+                },
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "System Length"
+                    }
+                  },
+                  "queryRef": "Settlement.System Length",
+                  "nativeQueryRef": "System Length"
+                },
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "System Price Value"
+                    }
+                  },
+                  "queryRef": "Settlement.System Price Value",
+                  "nativeQueryRef": "System Price Value"
+                },
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "NIV Value"
+                    }
+                  },
+                  "queryRef": "Settlement.NIV Value",
+                  "nativeQueryRef": "NIV Value"
+                },
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Reason"
+                    }
+                  },
+                  "queryRef": "Settlement.Reason",
+                  "nativeQueryRef": "Reason"
+                },
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Severity"
+                    }
+                  },
+                  "queryRef": "Settlement.Severity",
+                  "nativeQueryRef": "Severity"
+                },
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Quality Status"
+                    }
+                  },
+                  "queryRef": "Settlement.Quality Status",
+                  "nativeQueryRef": "Quality Status"
+                }
+              ]
+            },
+            "purpose": "Analytical exception queue | select a period for context"
+          },
+          {
+            "id": "note",
+            "kind": "textbox",
+            "text": "Data through 31 Dec 2025. Full-quarter thresholds remain fixed when filtering. Analytical flags are not service incidents.",
+            "position": [
+              32,
+              1016,
+              1856,
+              40
+            ],
+            "field_bindings": {},
+            "purpose": "Data through 31 Dec 2025. Full-quarter thresholds remain fixed when filtering. Analytical flags are not service incidents."
+          }
+        ],
+        "space_audit": {
+          "unplaced_regions": [],
+          "balance_rationale": "Desk-based review combines data status, aligned time views and a visible exception queue."
+        }
+      }
+    },
+    {
+      "name": "Market & Settlement Analysis",
+      "archetype": "Analytical",
+      "layout_variant": "B",
+      "variant_rationale": "Two useful slicers and six analytical views use the full canvas width.",
+      "layout_contract": {
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "margin": 32,
+          "gutter": 24,
+          "snap": 8
+        },
+        "placements": [
+          {
+            "id": "page_title",
+            "kind": "textbox",
+            "text": "Market & Settlement Analysis",
+            "position": [
+              32,
+              24,
+              1120,
+              56
+            ],
+            "field_bindings": {},
+            "purpose": "Market & Settlement Analysis"
+          },
+          {
+            "id": "scope",
+            "kind": "textbox",
+            "text": "Q4 2025 | Historical snapshot | Independent portfolio project",
+            "position": [
+              32,
+              88,
+              1120,
+              32
+            ],
+            "field_bindings": {},
+            "purpose": "Q4 2025 | Historical snapshot | Independent portfolio project"
+          },
+          {
+            "id": "month",
+            "kind": "slicer",
+            "text": "Month",
+            "position": [
+              1200,
+              24,
+              320,
+              88
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Date"
+                        }
+                      },
+                      "Property": "Month"
+                    }
+                  },
+                  "queryRef": "Date.Month",
+                  "nativeQueryRef": "Month"
+                }
+              ]
+            },
+            "purpose": "Month"
+          },
+          {
+            "id": "length",
+            "kind": "slicer",
+            "text": "System Length",
+            "position": [
+              1544,
+              24,
+              344,
+              88
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "System Length"
+                    }
+                  },
+                  "queryRef": "Settlement.System Length",
+                  "nativeQueryRef": "System Length"
+                }
+              ]
+            },
+            "purpose": "System Length"
+          },
+          {
+            "id": "compare",
+            "kind": "pivotTable",
+            "text": "Short / long comparison | GBP/MWh",
+            "position": [
+              32,
+              144,
+              584,
+              376
+            ],
+            "field_bindings": {
+              "Rows": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "System Length"
+                    }
+                  },
+                  "queryRef": "Settlement.System Length",
+                  "nativeQueryRef": "System Length"
+                }
+              ],
+              "Values": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Settlement Periods"
+                    }
+                  },
+                  "queryRef": "Settlement.Settlement Periods",
+                  "nativeQueryRef": "Settlement Periods"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Average System Price"
+                    }
+                  },
+                  "queryRef": "Settlement.Average System Price",
+                  "nativeQueryRef": "Average System Price"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Median System Price"
+                    }
+                  },
+                  "queryRef": "Settlement.Median System Price",
+                  "nativeQueryRef": "Median System Price"
+                }
+              ]
+            },
+            "purpose": "Short / long comparison | GBP/MWh"
+          },
+          {
+            "id": "distribution",
+            "kind": "columnChart",
+            "text": "Price distribution | 20 GBP/MWh bins",
+            "position": [
+              640,
+              144,
+              600,
+              376
+            ],
+            "field_bindings": {
+              "Category": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Price Bin"
+                    }
+                  },
+                  "queryRef": "Settlement.Price Bin",
+                  "nativeQueryRef": "Price Bin"
+                }
+              ],
+              "Y": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Settlement Periods"
+                    }
+                  },
+                  "queryRef": "Settlement.Settlement Periods",
+                  "nativeQueryRef": "Settlement Periods"
+                }
+              ]
+            },
+            "purpose": "Price distribution | 20 GBP/MWh bins"
+          },
+          {
+            "id": "intraday",
+            "kind": "lineChart",
+            "text": "Average price by period index | GBP/MWh",
+            "position": [
+              1264,
+              144,
+              624,
+              376
+            ],
+            "field_bindings": {
+              "Category": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement Period"
+                        }
+                      },
+                      "Property": "Period"
+                    }
+                  },
+                  "queryRef": "Settlement Period.Period",
+                  "nativeQueryRef": "Period"
+                }
+              ],
+              "Y": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Average System Price"
+                    }
+                  },
+                  "queryRef": "Settlement.Average System Price",
+                  "nativeQueryRef": "Average System Price"
+                }
+              ]
+            },
+            "purpose": "Average price by period index | GBP/MWh"
+          },
+          {
+            "id": "nivdistribution",
+            "kind": "columnChart",
+            "text": "NIV distribution | 100 MWh bins",
+            "position": [
+              32,
+              544,
+              584,
+              448
+            ],
+            "field_bindings": {
+              "Category": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "NIV Bin"
+                    }
+                  },
+                  "queryRef": "Settlement.NIV Bin",
+                  "nativeQueryRef": "NIV Bin"
+                }
+              ],
+              "Y": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Settlement Periods"
+                    }
+                  },
+                  "queryRef": "Settlement.Settlement Periods",
+                  "nativeQueryRef": "Settlement Periods"
+                }
+              ]
+            },
+            "purpose": "NIV distribution | 100 MWh bins"
+          },
+          {
+            "id": "relationship",
+            "kind": "scatterChart",
+            "text": "NIV versus System Price | MWh × GBP/MWh",
+            "position": [
+              640,
+              544,
+              824,
+              448
+            ],
+            "field_bindings": {
+              "Category": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Event"
+                    }
+                  },
+                  "queryRef": "Settlement.Event",
+                  "nativeQueryRef": "Event"
+                }
+              ],
+              "X": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Average NIV"
+                    }
+                  },
+                  "queryRef": "Settlement.Average NIV",
+                  "nativeQueryRef": "Average NIV"
+                }
+              ],
+              "Y": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Average System Price"
+                    }
+                  },
+                  "queryRef": "Settlement.Average System Price",
+                  "nativeQueryRef": "Average System Price"
+                }
+              ]
+            },
+            "purpose": "NIV versus System Price | MWh × GBP/MWh"
+          },
+          {
+            "id": "tails",
+            "kind": "cardVisual",
+            "text": "",
+            "position": [
+              1488,
+              544,
+              400,
+              192
+            ],
+            "field_bindings": {
+              "Data": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Extreme Price Periods"
+                    }
+                  },
+                  "queryRef": "Settlement.Extreme Price Periods",
+                  "nativeQueryRef": "Extreme Price Periods"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Extreme Imbalance Periods"
+                    }
+                  },
+                  "queryRef": "Settlement.Extreme Imbalance Periods",
+                  "nativeQueryRef": "Extreme Imbalance Periods"
+                }
+              ]
+            },
+            "purpose": ""
+          },
+          {
+            "id": "interpretation",
+            "kind": "textbox",
+            "text": "DESCRIPTIVE ASSOCIATION\nNIV direction and price are related in this quarter. Their association does not establish causality. SP49/50 occur only on the autumn clock-change day.",
+            "position": [
+              1488,
+              760,
+              400,
+              232
+            ],
+            "field_bindings": {},
+            "purpose": "DESCRIPTIVE ASSOCIATION\nNIV direction and price are related in this quarter. Their association does not establish causality. SP49/50 occur only on the autumn clock-change day."
+          },
+          {
+            "id": "note",
+            "kind": "textbox",
+            "text": "OBSERVED price and NIV; DERIVED summaries. Histograms show bin lower bounds. Review sample counts before comparing period indices.",
+            "position": [
+              32,
+              1016,
+              1856,
+              40
+            ],
+            "field_bindings": {},
+            "purpose": "OBSERVED price and NIV; DERIVED summaries. Histograms show bin lower bounds. Review sample counts before comparing period indices."
+          }
+        ],
+        "space_audit": {
+          "unplaced_regions": [],
+          "balance_rationale": "Two useful slicers and six analytical views use the full canvas width."
+        }
+      }
+    },
+    {
+      "name": "Exception Investigation",
+      "archetype": "Narrative",
+      "layout_variant": "A",
+      "variant_rationale": "Single-event selection separates established evidence from untested explanations in two columns.",
+      "layout_contract": {
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "margin": 32,
+          "gutter": 24,
+          "snap": 8
+        },
+        "placements": [
+          {
+            "id": "page_title",
+            "kind": "textbox",
+            "text": "Exception Investigation",
+            "position": [
+              32,
+              24,
+              1120,
+              56
+            ],
+            "field_bindings": {},
+            "purpose": "Exception Investigation"
+          },
+          {
+            "id": "scope",
+            "kind": "textbox",
+            "text": "Q4 2025 | Historical snapshot | Independent portfolio project",
+            "position": [
+              32,
+              88,
+              1120,
+              32
+            ],
+            "field_bindings": {},
+            "purpose": "Q4 2025 | Historical snapshot | Independent portfolio project"
+          },
+          {
+            "id": "event",
+            "kind": "slicer",
+            "text": "Event",
+            "position": [
+              1360,
+              24,
+              528,
+              88
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Investigation"
+                        }
+                      },
+                      "Property": "Event"
+                    }
+                  },
+                  "queryRef": "Investigation.Event",
+                  "nativeQueryRef": "Event"
+                }
+              ]
+            },
+            "purpose": "Event"
+          },
+          {
+            "id": "eventdetail",
+            "kind": "tableEx",
+            "text": "EVENT / WHAT HAPPENED",
+            "position": [
+              32,
+              144,
+              904,
+              184
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Investigation"
+                        }
+                      },
+                      "Property": "Event"
+                    }
+                  },
+                  "queryRef": "Investigation.Event",
+                  "nativeQueryRef": "Event"
+                },
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Investigation"
+                        }
+                      },
+                      "Property": "What Happened"
+                    }
+                  },
+                  "queryRef": "Investigation.What Happened",
+                  "nativeQueryRef": "What Happened"
+                }
+              ]
+            },
+            "purpose": "EVENT / WHAT HAPPENED"
+          },
+          {
+            "id": "flagdetail",
+            "kind": "tableEx",
+            "text": "WHY FLAGGED / DATA QUALITY",
+            "position": [
+              960,
+              144,
+              928,
+              184
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Investigation"
+                        }
+                      },
+                      "Property": "Why Flagged"
+                    }
+                  },
+                  "queryRef": "Investigation.Why Flagged",
+                  "nativeQueryRef": "Why Flagged"
+                },
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Investigation"
+                        }
+                      },
+                      "Property": "Data Quality"
+                    }
+                  },
+                  "queryRef": "Investigation.Data Quality",
+                  "nativeQueryRef": "Data Quality"
+                }
+              ]
+            },
+            "purpose": "WHY FLAGGED / DATA QUALITY"
+          },
+          {
+            "id": "known",
+            "kind": "tableEx",
+            "text": "KNOWN | observed and reconciled evidence",
+            "position": [
+              32,
+              352,
+              904,
+              368
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Investigation"
+                        }
+                      },
+                      "Property": "Known"
+                    }
+                  },
+                  "queryRef": "Investigation.Known",
+                  "nativeQueryRef": "Known"
+                }
+              ]
+            },
+            "purpose": "KNOWN | observed and reconciled evidence"
+          },
+          {
+            "id": "unknown",
+            "kind": "tableEx",
+            "text": "NOT ESTABLISHED",
+            "position": [
+              960,
+              352,
+              928,
+              184
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Investigation"
+                        }
+                      },
+                      "Property": "Not Established"
+                    }
+                  },
+                  "queryRef": "Investigation.Not Established",
+                  "nativeQueryRef": "Not Established"
+                }
+              ]
+            },
+            "purpose": "NOT ESTABLISHED"
+          },
+          {
+            "id": "hypotheses",
+            "kind": "tableEx",
+            "text": "HYPOTHESES | unconfirmed",
+            "position": [
+              960,
+              560,
+              928,
+              160
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Investigation"
+                        }
+                      },
+                      "Property": "Hypotheses"
+                    }
+                  },
+                  "queryRef": "Investigation.Hypotheses",
+                  "nativeQueryRef": "Hypotheses"
+                }
+              ]
+            },
+            "purpose": "HYPOTHESES | unconfirmed"
+          },
+          {
+            "id": "next",
+            "kind": "tableEx",
+            "text": "RECOMMENDED NEXT CHECKS",
+            "position": [
+              32,
+              744,
+              1200,
+              248
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Investigation"
+                        }
+                      },
+                      "Property": "Next Checks"
+                    }
+                  },
+                  "queryRef": "Investigation.Next Checks",
+                  "nativeQueryRef": "Next Checks"
+                }
+              ]
+            },
+            "purpose": "RECOMMENDED NEXT CHECKS"
+          },
+          {
+            "id": "state",
+            "kind": "tableEx",
+            "text": "INVESTIGATION STATUS",
+            "position": [
+              1256,
+              744,
+              632,
+              248
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Investigation"
+                        }
+                      },
+                      "Property": "Investigation Status"
+                    }
+                  },
+                  "queryRef": "Investigation.Investigation Status",
+                  "nativeQueryRef": "Investigation Status"
+                }
+              ]
+            },
+            "purpose": "INVESTIGATION STATUS"
+          },
+          {
+            "id": "note",
+            "kind": "textbox",
+            "text": "130 flagged periods are selectable. Only three have detailed price-stack evidence. Other cases remain queued for investigation.",
+            "position": [
+              32,
+              1016,
+              1856,
+              40
+            ],
+            "field_bindings": {},
+            "purpose": "130 flagged periods are selectable. Only three have detailed price-stack evidence. Other cases remain queued for investigation."
+          }
+        ],
+        "space_audit": {
+          "unplaced_regions": [],
+          "balance_rationale": "Single-event selection separates established evidence from untested explanations in two columns."
+        }
+      }
+    },
+    {
+      "name": "Data Quality & Controls",
+      "archetype": "Operational",
+      "layout_variant": "C",
+      "variant_rationale": "Audit table dominates; daily key coverage and whole-snapshot retrieval checks stay distinct.",
+      "layout_contract": {
+        "canvas": {
+          "width": 1920,
+          "height": 1080,
+          "margin": 32,
+          "gutter": 24,
+          "snap": 8
+        },
+        "placements": [
+          {
+            "id": "page_title",
+            "kind": "textbox",
+            "text": "Data Quality & Controls",
+            "position": [
+              32,
+              24,
+              1120,
+              56
+            ],
+            "field_bindings": {},
+            "purpose": "Data Quality & Controls"
+          },
+          {
+            "id": "scope",
+            "kind": "textbox",
+            "text": "Q4 2025 | Historical snapshot | Independent portfolio project",
+            "position": [
+              32,
+              88,
+              1120,
+              32
+            ],
+            "field_bindings": {},
+            "purpose": "Q4 2025 | Historical snapshot | Independent portfolio project"
+          },
+          {
+            "id": "dates",
+            "kind": "slicer",
+            "text": "Date",
+            "position": [
+              1448,
+              24,
+              440,
+              88
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Date"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "queryRef": "Date.Date",
+                  "nativeQueryRef": "Date"
+                }
+              ]
+            },
+            "purpose": "Date"
+          },
+          {
+            "id": "quality",
+            "kind": "cardVisual",
+            "text": "",
+            "position": [
+              32,
+              144,
+              1856,
+              160
+            ],
+            "field_bindings": {
+              "Data": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Date"
+                        }
+                      },
+                      "Property": "Expected Settlement Periods"
+                    }
+                  },
+                  "queryRef": "Date.Expected Settlement Periods",
+                  "nativeQueryRef": "Expected Settlement Periods"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Settlement Periods"
+                    }
+                  },
+                  "queryRef": "Settlement.Settlement Periods",
+                  "nativeQueryRef": "Settlement Periods"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Daily Controls"
+                        }
+                      },
+                      "Property": "Data Completeness %"
+                    }
+                  },
+                  "queryRef": "Daily Controls.Data Completeness %",
+                  "nativeQueryRef": "Data Completeness %"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Daily Controls"
+                        }
+                      },
+                      "Property": "Missing Settlement Periods"
+                    }
+                  },
+                  "queryRef": "Daily Controls.Missing Settlement Periods",
+                  "nativeQueryRef": "Missing Settlement Periods"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Daily Controls"
+                        }
+                      },
+                      "Property": "Duplicate Settlement Periods"
+                    }
+                  },
+                  "queryRef": "Daily Controls.Duplicate Settlement Periods",
+                  "nativeQueryRef": "Duplicate Settlement Periods"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Daily Controls"
+                        }
+                      },
+                      "Property": "Null Values"
+                    }
+                  },
+                  "queryRef": "Daily Controls.Null Values",
+                  "nativeQueryRef": "Null Values"
+                }
+              ]
+            },
+            "purpose": ""
+          },
+          {
+            "id": "source",
+            "kind": "tableEx",
+            "text": "Whole-snapshot source and retrieval controls",
+            "position": [
+              32,
+              328,
+              1856,
+              360
+            ],
+            "field_bindings": {
+              "Values": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Source Controls"
+                        }
+                      },
+                      "Property": "Control"
+                    }
+                  },
+                  "queryRef": "Source Controls.Control",
+                  "nativeQueryRef": "Control"
+                },
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Source Controls"
+                        }
+                      },
+                      "Property": "Status"
+                    }
+                  },
+                  "queryRef": "Source Controls.Status",
+                  "nativeQueryRef": "Status"
+                },
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Source Controls"
+                        }
+                      },
+                      "Property": "Detail"
+                    }
+                  },
+                  "queryRef": "Source Controls.Detail",
+                  "nativeQueryRef": "Detail"
+                }
+              ]
+            },
+            "purpose": "Whole-snapshot source and retrieval controls"
+          },
+          {
+            "id": "daily",
+            "kind": "pivotTable",
+            "text": "Daily coverage | clock changes included in expected counts",
+            "position": [
+              32,
+              712,
+              1168,
+              280
+            ],
+            "field_bindings": {
+              "Rows": [
+                {
+                  "field": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Date"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "queryRef": "Date.Date",
+                  "nativeQueryRef": "Date"
+                }
+              ],
+              "Values": [
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Date"
+                        }
+                      },
+                      "Property": "Expected Settlement Periods"
+                    }
+                  },
+                  "queryRef": "Date.Expected Settlement Periods",
+                  "nativeQueryRef": "Expected Settlement Periods"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Settlement"
+                        }
+                      },
+                      "Property": "Settlement Periods"
+                    }
+                  },
+                  "queryRef": "Settlement.Settlement Periods",
+                  "nativeQueryRef": "Settlement Periods"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Daily Controls"
+                        }
+                      },
+                      "Property": "Data Completeness %"
+                    }
+                  },
+                  "queryRef": "Daily Controls.Data Completeness %",
+                  "nativeQueryRef": "Data Completeness %"
+                },
+                {
+                  "field": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Daily Controls"
+                        }
+                      },
+                      "Property": "Validation Exceptions"
+                    }
+                  },
+                  "queryRef": "Daily Controls.Validation Exceptions",
+                  "nativeQueryRef": "Validation Exceptions"
+                }
+              ]
+            },
+            "purpose": "Daily coverage | clock changes included in expected counts"
+          },
+          {
+            "id": "clock",
+            "kind": "textbox",
+            "text": "CLOCK-CHANGE CONTROL\n26 October contains 50 periods. Expected coverage is calculated from London midnights in UTC.\n\nThis historical snapshot does not measure present service availability.",
+            "position": [
+              1224,
+              712,
+              664,
+              280
+            ],
+            "field_bindings": {},
+            "purpose": "CLOCK-CHANGE CONTROL\n26 October contains 50 periods. Expected coverage is calculated from London midnights in UTC.\n\nThis historical snapshot does not measure present service availability."
+          },
+          {
+            "id": "note",
+            "kind": "textbox",
+            "text": "Retrieval: 9 September 2026 UTC. Required fields validated before analysis. Source controls apply to the full snapshot, regardless of slicers.",
+            "position": [
+              32,
+              1016,
+              1856,
+              40
+            ],
+            "field_bindings": {},
+            "purpose": "Retrieval: 9 September 2026 UTC. Required fields validated before analysis. Source controls apply to the full snapshot, regardless of slicers."
+          }
+        ],
+        "space_audit": {
+          "unplaced_regions": [],
+          "balance_rationale": "Audit table dominates; daily key coverage and whole-snapshot retrieval checks stay distinct."
+        }
+      }
+    }
+  ],
+  "accessibility": {
+    "font": "Segoe UI",
+    "minimum_font_pt": 14,
+    "status": "Text labels supplement colour; runtime inspection pending"
+  },
+  "overrides": "No gradients, smoothing, gauges or decorative cards. Page3 event slicer is explicitly required by user despite narrative archetype defaults."
+}
