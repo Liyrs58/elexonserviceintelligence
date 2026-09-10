@@ -19,6 +19,7 @@ Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: BLOCKE
 | Python engineering and tests | PASS | modular pipeline, fail-closed run marker and 38 passing tests |
 | Semantic-model definition | OFFLINE MODEL PASS | official Modeling MCP parses six tables, four relationships and 19 ready-state measures; engine execution pending |
 | Four Power BI pages | STATIC PASS | 39 data-bound PBIR visuals and zero validator diagnostics; live rendering pending |
+| Portable Power BI reviewer bundle | PASS | deterministic ZIP, no machine-specific path, successful fresh-extraction validator/model import and per-file manifest |
 | Power BI cross-system checks | PARTIAL | Modeling MCP binds all measures in ready state and Python/DuckDB intended results agree; DAX has not executed |
 | Power BI accessibility/interactions/performance | PENDING | requires licensed Desktop/Fabric refresh and rendering |
 | Static presentation previews | PASS | four visually inspected 1920 × 1080 data-bound previews, labelled as non-runtime evidence |
@@ -58,4 +59,4 @@ Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: BLOCKE
 
 The smallest close is to send `reports/elexon-powerbi-review-package.zip` to a licensed Windows reviewer and follow `reports/powerbi-reviewer-handoff.md` plus `reports/powerbi-live-verification-checklist.md`: open the PBIP, set `DataFolder`, refresh, compare all 19 measures, test slicers/interactions, inspect performance and capture all four genuine runtime pages. A licensed Fabric workspace with a supported local-file data route is the alternative. Current Azure Fabric discovery returned `UserNotLicensed`.
 
-The same condition was revalidated on three consecutive goal turns. The latest checks found zero local Power BI Desktop/Analysis Services instances, exactly one offline Modeling MCP folder connection and another browser-controller startup failure after reset. Completion now requires user-provided licensed runtime access; no supported local fallback can prove the missing execution and rendering requirements.
+The same condition was revalidated on three consecutive goal turns before handoff. In the current resumed audit it has been confirmed twice: the browser workflow again failed to start, while Modeling MCP found zero local Power BI Desktop/Analysis Services instances and only offline folder connections. Completion still requires user-provided licensed runtime access; no supported local fallback can prove the missing execution and rendering requirements.

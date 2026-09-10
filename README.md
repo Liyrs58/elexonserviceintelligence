@@ -84,7 +84,7 @@ The semantic model has Date and Settlement Period dimensions, Settlement and Dai
 - Editable presentation: `reports/presentation/settlement-service-intelligence.pptx`; reviewed PDF export: `reports/presentation/settlement-service-intelligence.pdf`.
 - Presentation verification: `reports/presentation-qa.md`.
 - Licensed Power BI close-out checklist: `reports/powerbi-live-verification-checklist.md`.
-- Uploadable Windows reviewer bundle: `reports/elexon-powerbi-review-package.zip` (SHA-256 `c6424e8512d8dd0815181ad57512192dd626e9ed6ae418eaf8f0ec8dace7bcf2`); instructions: `reports/powerbi-reviewer-handoff.md`.
+- Uploadable Windows reviewer bundle: `reports/elexon-powerbi-review-package.zip` (SHA-256 `b3850b4fc6c52e0b17f401d8064e3576d13b4afa6b18675fa0887fa1d8df6f3c`); instructions: `reports/powerbi-reviewer-handoff.md`; extraction test: `reports/powerbi-review-package-qa.md`.
 - Static preview provenance and hashes: `screenshots/README.md` and `reports/powerbi-static-preview-qa.md`.
 - Reproducibility audit: `reports/reproducibility-qa.md`.
 - Definitions and analytical assumptions: `METHODOLOGY.md`.
@@ -114,6 +114,8 @@ The fetch prints its new manifest path. Substitute that exact path below; do not
 .venv/bin/python -m src.analysis.investigation_queue
 node powerbi/build_model.mjs
 node powerbi/build_report.mjs
+.venv/bin/python src/reporting/build_powerbi_previews.py
+.venv/bin/python src/reporting/build_powerbi_review_package.py
 ```
 
 The core pipeline is offline after retrieval. Detailed investigation retrieval is a separate network step and preserves its own context snapshot. Subsequent reconciliation and queue generation are offline. The insight-note builder uses ReportLab from `requirements.txt`. The editable presentation builder uses the Codex bundled `@oai/artifact-tool`; the checked-in PPTX/PDF can be reviewed without that authoring runtime. Node Power BI generators use built-in modules; Microsoft report-authoring validation requires the separately documented official tooling in `SETUP_REPORT.md`.

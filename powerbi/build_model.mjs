@@ -103,7 +103,8 @@ table('Investigation','processed/investigation_queue.csv',[
 for(const name of ['Settlement','Daily Controls','Investigation'])relationships.push(`relationship ${quote(name+' to Date')}\n\tfromColumn: ${quote(name)}.Date\n\ttoColumn: 'Date'.Date\n\tcrossFilteringBehavior: oneDirection\n`);
 relationships.push("relationship 'Settlement to Period'\n\tfromColumn: 'Settlement'.Period\n\ttoColumn: 'Settlement Period'.Period\n\tcrossFilteringBehavior: oneDirection\n");
 fs.writeFileSync(path.join(def,'relationships.tmdl'),relationships.join('\n'));
-fs.writeFileSync(path.join(def,'expressions.tmdl'),`/// Root data folder. Change this single parameter when moving the project.\nexpression DataFolder = "${path.join(root,'data').replaceAll('"','""')}" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]\n`);
+const defaultDataFolder = process.env.POWERBI_DATA_FOLDER || 'REPLACE_WITH_ABSOLUTE_PATH_TO_PROJECT_DATA';
+fs.writeFileSync(path.join(def,'expressions.tmdl'),`/// Root data folder. Change this single parameter when moving the project.\nexpression DataFolder = "${defaultDataFolder.replaceAll('"','""')}" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]\n`);
 fs.writeFileSync(path.join(def,'model.tmdl'),`model Model\n\tculture: en-GB\n\tdefaultPowerBIDataSourceVersion: powerBI_V3\n\tsourceQueryCulture: en-GB\n\tdiscourageImplicitMeasures\n\n${tables.map(n=>'ref table '+quote(n)).join('\n')}\n`);
 json('powerbi/measure-catalog.json',catalog);
 console.log(`Created ${tables.length} tables, ${relationships.length} relationships, ${catalog.length} explicit measures. Runtime verification pending.`);

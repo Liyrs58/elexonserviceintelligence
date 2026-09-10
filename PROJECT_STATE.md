@@ -28,12 +28,14 @@ Three detailed cases cover maximum price, minimum price and maximum absolute NIV
 - Reviewer records: `reports/reproducibility-qa.md`, `reports/powerbi-definition-qa.md`, `reports/insight-note-qa.md`, `reports/presentation-qa.md`, `reports/source-link-qa.md`, `reports/claim-audit.md` and `reports/requirements-audit.md`.
 - Live close-out runbook: `reports/powerbi-live-verification-checklist.md`, including all 19 expected values, filter-context checks, page QA, performance evidence and screenshot naming.
 - Four visually inspected 1920 × 1080 static design previews derived from the canonical data and PBIR inventories. They are labelled on-canvas and documented as non-runtime evidence in `screenshots/README.md` and `reports/powerbi-static-preview-qa.md`.
-- Self-contained Windows reviewer bundle: `reports/elexon-powerbi-review-package.zip` (SHA-256 `c6424e8512d8dd0815181ad57512192dd626e9ed6ae418eaf8f0ec8dace7bcf2`), containing the PBIP/PBIR/TMDL project, required processed/quality CSVs, preview images, verification checklist and a per-file SHA-256 manifest.
+- Self-contained Windows reviewer bundle: `reports/elexon-powerbi-review-package.zip` (SHA-256 `b3850b4fc6c52e0b17f401d8064e3576d13b4afa6b18675fa0887fa1d8df6f3c`), containing the PBIP/PBIR/TMDL project, required processed/quality CSVs, preview images, verification checklist and a per-file SHA-256 manifest. A fresh extraction independently passed the report validator and Modeling MCP import; see `reports/powerbi-review-package-qa.md`.
 - Reviewer documentation: `README.md`, `METHODOLOGY.md`, `DECISIONS.md`, `SOURCES.md`, `SETUP_REPORT.md`, `SETUP_SOURCES.md` and `data/README.md`.
 
 ## Remaining external gate
 
 Power BI Desktop is unavailable natively on this Mac. The in-app browser previously reached Power BI Service but was at Microsoft sign-in, the browser-control service was unavailable on the final continuation, and the available Fabric identity returned `UserNotLicensed`. The Modeling MCP connection is offline and rejects DAX query execution. Consequently M refresh, actual DAX results, slicer/filter interactions, rendered visual accessibility/clipping, empty states, performance and genuine report screenshots are unverified.
+
+On 10 September, the installed Power BI browser workflow was rechecked and its local browser service again failed to start. Modeling MCP simultaneously found zero local Power BI Desktop/Analysis Services instances and only offline folder connections. This is the second confirmation in the current post-handoff blocked audit.
 
 This blocker was independently revalidated across three consecutive goal turns:
 
@@ -58,6 +60,8 @@ GitHub publishing was not authorised and was not attempted. CV bullets and inter
 .venv/bin/python -m src.analysis.investigation_queue
 node powerbi/build_model.mjs
 node powerbi/build_report.mjs
+.venv/bin/python src/reporting/build_powerbi_previews.py
+.venv/bin/python src/reporting/build_powerbi_review_package.py
 .tools/powerbi-cli/node_modules/.bin/powerbi-report-author validate powerbi/project/Settlement.Report
 ```
 
