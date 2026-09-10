@@ -50,7 +50,7 @@ No supported local action remains that can execute or render the report without 
 
 The smallest close is to send `reports/elexon-powerbi-review-package.zip` to a reviewer with licensed Windows Power BI Desktop. They should follow `reports/powerbi-reviewer-handoff.md` and `reports/powerbi-live-verification-checklist.md`: set `DataFolder`, refresh, compare all 19 measures, test interactions, inspect performance and capture all four genuine runtime pages. Do not claim runtime verification until that evidence passes.
 
-External portfolio publishing and application wording were authorised on 10 September. GitHub publishing could not proceed because no remote exists and the saved GitHub CLI authentication is invalid, so the recruiter site is published through OpenAI Sites instead. Career wording is now supplied with the runtime limitation preserved; it does not claim live Power BI execution.
+External portfolio publishing and application wording were authorised on 10 September. GitHub publishing could not proceed because no remote exists and the saved GitHub CLI authentication is invalid. A public recruiter site was therefore built and submitted through OpenAI Sites; its source/package are verified, while the hosting provider's publish job remains in progress at this handoff. Career wording is now supplied with the runtime limitation preserved; it does not claim live Power BI execution.
 
 ## Reproduction and verification commands
 
