@@ -35,7 +35,7 @@ Three detailed cases cover maximum price, minimum price and maximum absolute NIV
 
 Power BI Desktop is unavailable natively on this Mac. The in-app browser previously reached Power BI Service but was at Microsoft sign-in, the browser-control service was unavailable on the final continuation, and the available Fabric identity returned `UserNotLicensed`. The Modeling MCP connection is offline and rejects DAX query execution. Consequently M refresh, actual DAX results, slicer/filter interactions, rendered visual accessibility/clipping, empty states, performance and genuine report screenshots are unverified.
 
-On 10 September, the installed Power BI browser workflow was rechecked and its local browser service again failed to start. Modeling MCP simultaneously found zero local Power BI Desktop/Analysis Services instances and only offline folder connections. This is the second confirmation in the current post-handoff blocked audit.
+On 10 September, the installed Power BI browser workflow was rechecked twice; its local browser service failed to start on both attempts. Modeling MCP simultaneously found zero local Power BI Desktop/Analysis Services instances and only offline folder connections. This is the third consecutive confirmation in the current post-handoff blocked audit.
 
 This blocker was independently revalidated across three consecutive goal turns:
 
