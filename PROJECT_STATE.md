@@ -2,7 +2,7 @@
 
 ## Objective and status
 
-Finish, verify and package the GB Settlement & Imbalance Service Intelligence Monitor in `PROJECT_SPEC.md` without rebuilding completed work. As of 9 September 2026, all work that can be verified on this Mac is complete. Final completion is **BLOCKED by an external licensed Power BI runtime/access gate** described below; it must not be reported as fully complete.
+Finish, verify and package the GB Settlement & Imbalance Service Intelligence Monitor in `PROJECT_SPEC.md` without rebuilding completed work. As of 10 September 2026, all work that can be verified on this Mac is complete. Final Power BI runtime verification remains **BLOCKED by an external licensed Power BI runtime/access gate** described below; it must not be reported as fully complete.
 
 ## Verified analytical package
 
@@ -12,6 +12,7 @@ Finish, verify and package the GB Settlement & Imbalance Service Intelligence Mo
 - Current suite: 38 tests pass. Coverage includes GB clock changes, malformed and incomplete input, retry behaviour, source-vintage controls, raw hash integrity, failed-refresh gating, reconciliation completeness and idempotence.
 - The pipeline writes `running` before work, writes `failed` on any exception and exposes outputs only when the current run marker is `success`. Investigation, reconciliation, queue generation and all six Power BI imports enforce the same gate.
 - Python and DuckDB agree within 1e-8 on nine key aggregates.
+- Version reconciliation confirms that Q4 is the population underlying the current report and recruiter artifacts. The isolated unchanged-pipeline reproduction of 1 August–31 October returns 4,418 periods, 1,971 short/2,445 long/two balanced and 124 flags; no August–October dataset or result exists in this repository's commits. Exact thresholds, hashes, commit lineage and the +6 decomposition are in `reports/version-reconciliation.md`.
 
 ## Current findings
 
@@ -30,6 +31,8 @@ Three detailed cases cover maximum price, minimum price and maximum absolute NIV
 - Four visually inspected 1920 × 1080 static design previews derived from the canonical data and PBIR inventories. They are labelled on-canvas and documented as non-runtime evidence in `screenshots/README.md` and `reports/powerbi-static-preview-qa.md`.
 - Self-contained Windows reviewer bundle: `reports/elexon-powerbi-review-package.zip` (SHA-256 `b3850b4fc6c52e0b17f401d8064e3576d13b4afa6b18675fa0887fa1d8df6f3c`), containing the PBIP/PBIR/TMDL project, required processed/quality CSVs, preview images, verification checklist and a per-file SHA-256 manifest. A fresh extraction independently passed the report validator and Modeling MCP import; see `reports/powerbi-review-package-qa.md`.
 - Reviewer documentation: `README.md`, `METHODOLOGY.md`, `DECISIONS.md`, `SOURCES.md`, `SETUP_REPORT.md`, `SETUP_SOURCES.md` and `data/README.md`.
+- Evidence-safe application support: `reports/interview-preparation.md` and `reports/cv-bullets.md`, both restricted to the canonical Q4 figures and explicit about the pending licensed runtime gate.
+- Recruiter-facing multi-page site source: `site/`; published-site details are recorded after deployment without changing the Power BI design.
 
 ## Remaining external gate
 
@@ -43,11 +46,11 @@ This blocker was independently revalidated across three consecutive goal turns:
 2. A fresh browser-controller restart failed; Modeling MCP exposed only an offline folder connection, rejected DAX execution, and found zero local runtime instances.
 3. A second fresh browser-controller restart again failed; Modeling MCP again found zero local Power BI Desktop/Analysis Services instances and only the offline `Settlement` connection.
 
-No supported local action remains that can execute or render the report without credentials, a licence and an external runtime. Do not acquire a trial, bypass authentication, publish externally or substitute another calculation engine as Power BI evidence.
+No supported local action remains that can execute or render the report without credentials, a licence and an external runtime. Do not acquire a trial, bypass authentication or substitute another calculation engine as Power BI evidence.
 
 The smallest close is to send `reports/elexon-powerbi-review-package.zip` to a reviewer with licensed Windows Power BI Desktop. They should follow `reports/powerbi-reviewer-handoff.md` and `reports/powerbi-live-verification-checklist.md`: set `DataFolder`, refresh, compare all 19 measures, test interactions, inspect performance and capture all four genuine runtime pages. Do not claim runtime verification until that evidence passes.
 
-GitHub publishing was not authorised and was not attempted. CV bullets and interview answers remain deferred under `PROJECT_SPEC.md` until live Power BI verification completes.
+External portfolio publishing and application wording were authorised on 10 September. GitHub publishing could not proceed because no remote exists and the saved GitHub CLI authentication is invalid, so the recruiter site is published through OpenAI Sites instead. Career wording is now supplied with the runtime limitation preserved; it does not claim live Power BI execution.
 
 ## Reproduction and verification commands
 

@@ -22,3 +22,9 @@
 - Package a one-page service insight note and an eight-slide editable presentation. Keep the presentation's evidence chart and core evidence grids native and editable; export a reviewed PDF for stable reading.
 - Treat the official Microsoft report validator's zero-error result as structural evidence only. M refresh, DAX results, slicer behaviour, rendered accessibility and performance require the licensed runtime gate.
 - Treat official Modeling MCP folder import as a required semantic-model parse gate. It found invalid generated date-column property sequencing that the PBIR validator did not cover; correct the generator, regenerate, and require a successful six-table/19-measure/four-relationship import before delivery.
+
+## 10 September 2026
+
+- Confirm Q4 2025 as the sole canonical project version because the current run receipt, PBIR/PBIP data bindings, report annotations, presentation, service note and design previews all use that population. Retain the separate August–October result only as reconciliation evidence; do not mix its 124 flags or 1,971/2,445 system-length counts into canonical outputs.
+- Reproduce August–October with the unchanged pipeline in an isolated temporary directory. Its 124 flags result from a different full-window population and therefore different empirical percentiles and overlaps, not from altered percentile levels or threshold forcing.
+- Publish a recruiter-facing multi-page companion site using the existing report design previews and audited deliverables. Keep every preview labelled non-runtime and keep the licensed Power BI execution limitation visible.

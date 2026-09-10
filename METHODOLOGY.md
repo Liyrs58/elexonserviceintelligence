@@ -4,6 +4,8 @@
 
 This independent portfolio study examines GB Settlement Period observations for 1 October–31 December 2025. It demonstrates CONTROL → DETECT → INVESTIGATE → COMMUNICATE → RECOMMEND. A historical snapshot does not establish present service availability, original publication timeliness, or deployment of an operational monitor.
 
+This Q4 window is canonical because it is the successful snapshot referenced by `data/processed/run.json` and is the population used by the current semantic model inputs, report annotations, presentation and service note. A separate 1 August–31 October run is a valid comparison run, not an alternative result for the same data. It is excluded from project claims; see `reports/version-reconciliation.md`.
+
 ## Sources and definitions
 
 Elexon administers the Balancing and Settlement Code arrangements. Imbalance settlement accounts for differences between contracted and actual energy positions. System Buy/Sell Prices are imbalance (cash-out) prices, not domestic tariffs. Refer to SOURCES.md E1–E4 and the official BSC guidance for formal definitions and the full calculation.
@@ -35,6 +37,8 @@ Price tails are at or below the full-window 1st percentile or at or above the 99
 This is retrospective screening: the observation contributes to its own reference distribution. It is not an out-of-sample detector. A future monitoring implementation should freeze a prior-window reference and evaluate workload/stability. Flags indicate unusual values, not errors, incidents or probability of harm.
 
 Empirical percentiles use rank(method=max)/N, placing ties at the upper rank. A descriptive robust price score uses (price−median)/(1.4826×MAD); if MAD is zero the implementation returns zero and does not use this score as a flag. Pearson and Spearman correlations describe association, never causation. No inference assumes independent half-hours or supplies misleading significance tests for serial data.
+
+Because thresholds are estimated from the full selected window, changing the window changes both the observations and the empirical cut-offs without changing the method. The reproduced August–October window gives 124 distinct flags (95 price, 45 NIV, 16 overlaps) at price thresholds −£24.95/£157 and absolute-NIV threshold 960.5836 MWh. Q4 gives 130 (92 price, 45 NIV, seven overlaps) at −£11.22/£153.8997 and 876.0417 MWh. This six-flag difference is population sensitivity, not threshold tuning.
 
 ## Investigation method
 

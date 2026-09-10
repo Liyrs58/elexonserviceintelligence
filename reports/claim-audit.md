@@ -1,6 +1,6 @@
 # Final claim audit
 
-Reviewed 9 September 2026 across README, METHODOLOGY, Power BI definitions, insight note and presentation.
+Reviewed 10 September 2026 across README, METHODOLOGY, Power BI definitions, insight note, presentation, version reconciliation, recruiter site, interview preparation and CV bullets.
 
 ## Supported and derived claims
 
@@ -21,6 +21,7 @@ Reviewed 9 September 2026 across README, METHODOLOGY, Power BI definitions, insi
 | Four PBIR pages, 39 visuals, six model tables and 19 ready-state measures exist | SUPPORTED | official CLI inventory, Modeling MCP parse and current PBIP/TMDL files |
 | Four 1920 × 1080 static design previews reflect retained values and intended page layouts | SUPPORTED, NON-RUNTIME | canonical CSVs, official PBIR inventories, generator and visual QA record |
 | Insight note is one reviewed page; presentation is eight reviewed pages/slides | SUPPORTED | rendered PDFs, presentation finalizer and PNG inspection records |
+| Q4 is the current canonical report population; August–October's 124 is a separate-window result | SUPPORTED / FLAG | PBIR/TMDL bindings, current run receipt, Git history and isolated unchanged-pipeline reproduction documented in `version-reconciliation.md` |
 
 ## Domain claims
 
@@ -32,4 +33,4 @@ The suggestion that retained action prices may explain price severity better tha
 
 ## Unsupported-claim check
 
-No output claims production-grade operation, real-time monitoring, automated root-cause analysis, official Elexon status, operational deployment, causal proof, Power BI DAX execution or a published Fabric report. The README's four images are prominently labelled static design previews, not genuine rendered Power BI screenshots. No material unsupported claim remains in the reviewed deliverables.
+No output claims production-grade operation, real-time monitoring, automated root-cause analysis, official Elexon status, operational deployment, causal proof, Power BI DAX execution or a published Fabric report. The README and recruiter site's four images are prominently labelled static design previews, not genuine rendered Power BI screenshots. Career wording describes the report as built and structurally validated, not runtime-verified. No material unsupported claim remains in the reviewed deliverables.

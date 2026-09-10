@@ -6,6 +6,8 @@ An independent operational analytics project using public Elexon data to validat
 
 Q4 2025 · 4,418 validated Settlement Periods · 130 analytical exceptions · three detailed price investigations
 
+**Canonical version:** Q4 2025 is the version bound to the current PBIR/PBIP project and used by the presentation, service note and static previews. A separately reported Cursor rebuild used 1 August–31 October 2025 and correctly produced 124 flags for that different 92-day population; it is not a revision of this report. The complete lineage and exact arithmetic are recorded in `reports/version-reconciliation.md`.
+
 **Delivery status:** the reproducible Python/SQL analysis is verified. Four Power BI report pages pass Microsoft's report validator, and the semantic model imports successfully through Microsoft's Modeling MCP with all 19 measures in ready state. Live DAX, filtering and visual verification remain pending a licensed Power BI environment. The images below are explicitly labelled static, data-bound design previews; they are not Power BI runtime screenshots.
 
 ## Static Power BI design previews
@@ -87,12 +89,14 @@ The semantic model has Date and Settlement Period dimensions, Settlement and Dai
 - Uploadable Windows reviewer bundle: `reports/elexon-powerbi-review-package.zip` (SHA-256 `b3850b4fc6c52e0b17f401d8064e3576d13b4afa6b18675fa0887fa1d8df6f3c`); instructions: `reports/powerbi-reviewer-handoff.md`; extraction test: `reports/powerbi-review-package-qa.md`.
 - Static preview provenance and hashes: `screenshots/README.md` and `reports/powerbi-static-preview-qa.md`.
 - Reproducibility audit: `reports/reproducibility-qa.md`.
+- Canonical-version and 130-versus-124 reconciliation: `reports/version-reconciliation.md`.
+- Interview preparation and evidence-safe CV wording: `reports/interview-preparation.md` and `reports/cv-bullets.md`.
 - Definitions and analytical assumptions: `METHODOLOGY.md`.
 - Domain/API/tool sources and benchmark references: `SOURCES.md` and `research/`.
 - Measure definitions: `powerbi/measure-catalog.json`.
 - Full brief, decisions and exact outstanding work: `PROJECT_SPEC.md`, `DECISIONS.md`, `PROJECT_STATE.md`.
 
-No CV or interview claim should imply live deployment, Power BI runtime verification or proven market causality. Final career wording is deferred until the deliverables pass their verification gates.
+No CV or interview claim should imply live deployment, Power BI runtime verification or proven market causality. The supplied career wording names the Power BI work as a structurally validated report project and keeps the licensed-runtime limitation explicit.
 
 ## Reproduce the analysis
 

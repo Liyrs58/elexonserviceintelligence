@@ -30,8 +30,8 @@ Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: BLOCKE
 | Incident/status context | PASS WITH LIMITATION | official issue/status sources checked; no coincident incident established; status site fetch 403 |
 | Final claims and adversarial review | PASS | `reports/claim-audit.md`; unsupported and causal claims removed/avoided |
 | Git milestones | PASS | ingestion, model, integrity-hardening and final packaging are recorded as local commits |
-| GitHub publishing | NOT AUTHORISED | local repository prepared; no external write attempted |
-| CV bullets and interview answers | DEFERRED BY SPEC | may be produced only after live Power BI verification completes |
+| Recruiter-facing publishing | PASS VIA SITES | multi-page public portfolio companion; GitHub remote unavailable because saved CLI authentication is invalid |
+| CV bullets and interview answers | PASS WITH RUNTIME CAVEAT | canonical Q4 facts only; no claim of live Power BI execution |
 
 ## Required final technical QA checklist
 
