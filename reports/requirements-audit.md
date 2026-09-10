@@ -21,7 +21,8 @@ Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: BLOCKE
 | Four Power BI pages | STATIC PASS | 39 data-bound PBIR visuals and zero validator diagnostics; live rendering pending |
 | Power BI cross-system checks | PARTIAL | Modeling MCP binds all measures in ready state and Python/DuckDB intended results agree; DAX has not executed |
 | Power BI accessibility/interactions/performance | PENDING | requires licensed Desktop/Fabric refresh and rendering |
-| Genuine Power BI screenshots / README hero | PENDING | deliberately omitted rather than fabricated |
+| Static presentation previews | PASS | four visually inspected 1920 × 1080 data-bound previews, labelled as non-runtime evidence |
+| Genuine Power BI runtime screenshots | PENDING | require licensed Desktop/Fabric rendering; static previews do not close this gate |
 | METHODOLOGY, README, decisions/state and reproduction docs | PASS | reviewer documents present and audited |
 | One-page service insight note | PASS | PDF, source builder and visual QA |
 | Eight-slide editable presentation and PDF | PASS | PPTX/PDF, native chart/tables, finalizer and eight-page visual review |
@@ -39,7 +40,7 @@ Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: BLOCKE
 4. SQL analysis: **PASS**, executed within the pipeline.
 5. Material-statistic cross-check: **PASS**, Python/DuckDB tolerance 1e-8.
 6. Power BI measure verification: **PARTIAL**, all definitions parse and bind in the official Modeling MCP and intended results are independently checked; DAX values have not executed.
-7. Four Power BI pages visually inspected: **PENDING**, no licensed rendering.
+7. Four intended page layouts visually inspected: **STATIC PASS**; genuine Power BI rendering remains pending.
 8. Filters/slicers/interactions: **PENDING**, no licensed rendering.
 9. Power BI performance: **PENDING**, no licensed rendering.
 10. METHODOLOGY review: **PASS**.
@@ -55,6 +56,6 @@ Reviewed against `PROJECT_SPEC.md` on 9 September 2026. **Overall status: BLOCKE
 
 ## Completion blocker
 
-The smallest close is to follow `reports/powerbi-live-verification-checklist.md`: open `powerbi/project/Settlement.pbip` in a licensed Power BI Desktop environment, set `DataFolder`, refresh, compare all 19 measures with the recorded expected values, test slicers/interactions, inspect performance and capture all four pages. A licensed Fabric workspace with a supported local-file data route is the alternative. Current Azure Fabric discovery returned `UserNotLicensed`; the last visible Power BI Service state was at sign-in and the browser-control service was unavailable on the final continuation.
+The smallest close is to send `reports/elexon-powerbi-review-package.zip` to a licensed Windows reviewer and follow `reports/powerbi-reviewer-handoff.md` plus `reports/powerbi-live-verification-checklist.md`: open the PBIP, set `DataFolder`, refresh, compare all 19 measures, test slicers/interactions, inspect performance and capture all four genuine runtime pages. A licensed Fabric workspace with a supported local-file data route is the alternative. Current Azure Fabric discovery returned `UserNotLicensed`.
 
 The same condition was revalidated on three consecutive goal turns. The latest checks found zero local Power BI Desktop/Analysis Services instances, exactly one offline Modeling MCP folder connection and another browser-controller startup failure after reset. Completion now requires user-provided licensed runtime access; no supported local fallback can prove the missing execution and rendering requirements.

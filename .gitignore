@@ -43,6 +43,8 @@ reports/*
 !reports/presentation/*.pdf
 screenshots/*
 !screenshots/.gitkeep
+!screenshots/README.md
+!screenshots/powerbi-static-preview-*.png
 
 # Power BI local/temporary artifacts
 *.pbix
@@ -57,6 +59,9 @@ powerbi/**/*cache.abf
 # General temporary/export files
 tmp/
 temp/
+output/
+.playwright-cli/
 *.tmp
 *.bak
 *.zip
+!reports/elexon-powerbi-review-package.zip

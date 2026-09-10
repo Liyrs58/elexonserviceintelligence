@@ -27,6 +27,8 @@ Three detailed cases cover maximum price, minimum price and maximum absolute NIV
 - Eight-slide editable presentation: `reports/presentation/settlement-service-intelligence.pptx`, plus reviewed PDF export. Package, geometry, font, first-party reimport and native-chart checks pass.
 - Reviewer records: `reports/reproducibility-qa.md`, `reports/powerbi-definition-qa.md`, `reports/insight-note-qa.md`, `reports/presentation-qa.md`, `reports/source-link-qa.md`, `reports/claim-audit.md` and `reports/requirements-audit.md`.
 - Live close-out runbook: `reports/powerbi-live-verification-checklist.md`, including all 19 expected values, filter-context checks, page QA, performance evidence and screenshot naming.
+- Four visually inspected 1920 × 1080 static design previews derived from the canonical data and PBIR inventories. They are labelled on-canvas and documented as non-runtime evidence in `screenshots/README.md` and `reports/powerbi-static-preview-qa.md`.
+- Self-contained Windows reviewer bundle: `reports/elexon-powerbi-review-package.zip` (SHA-256 `c6424e8512d8dd0815181ad57512192dd626e9ed6ae418eaf8f0ec8dace7bcf2`), containing the PBIP/PBIR/TMDL project, required processed/quality CSVs, preview images, verification checklist and a per-file SHA-256 manifest.
 - Reviewer documentation: `README.md`, `METHODOLOGY.md`, `DECISIONS.md`, `SOURCES.md`, `SETUP_REPORT.md`, `SETUP_SOURCES.md` and `data/README.md`.
 
 ## Remaining external gate
@@ -41,7 +43,7 @@ This blocker was independently revalidated across three consecutive goal turns:
 
 No supported local action remains that can execute or render the report without credentials, a licence and an external runtime. Do not acquire a trial, bypass authentication, publish externally or substitute another calculation engine as Power BI evidence.
 
-The smallest close is for the user to provide a licensed Windows Power BI Desktop environment with this repository available, or sign into a licensed Fabric workspace that supports the local-file model, then ask the agent to continue. Follow `reports/powerbi-live-verification-checklist.md`: set `DataFolder`, refresh, compare all 19 measures, test interactions, inspect performance and capture all four pages. Do not claim runtime verification or use a dashboard screenshot until this passes.
+The smallest close is to send `reports/elexon-powerbi-review-package.zip` to a reviewer with licensed Windows Power BI Desktop. They should follow `reports/powerbi-reviewer-handoff.md` and `reports/powerbi-live-verification-checklist.md`: set `DataFolder`, refresh, compare all 19 measures, test interactions, inspect performance and capture all four genuine runtime pages. Do not claim runtime verification until that evidence passes.
 
 GitHub publishing was not authorised and was not attempted. CV bullets and interview answers remain deferred under `PROJECT_SPEC.md` until live Power BI verification completes.
 

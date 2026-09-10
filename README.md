@@ -6,7 +6,19 @@ An independent operational analytics project using public Elexon data to validat
 
 Q4 2025 · 4,418 validated Settlement Periods · 130 analytical exceptions · three detailed price investigations
 
-**Delivery status:** the reproducible Python/SQL analysis is verified. Four Power BI report pages pass Microsoft's report validator, and the semantic model imports successfully through Microsoft's Modeling MCP with all 19 measures in ready state. Live DAX, filtering and visual verification remain pending a licensed Power BI environment. A genuine dashboard hero screenshot belongs here after that verification. No mock image is presented as a Power BI screenshot.
+**Delivery status:** the reproducible Python/SQL analysis is verified. Four Power BI report pages pass Microsoft's report validator, and the semantic model imports successfully through Microsoft's Modeling MCP with all 19 measures in ready state. Live DAX, filtering and visual verification remain pending a licensed Power BI environment. The images below are explicitly labelled static, data-bound design previews; they are not Power BI runtime screenshots.
+
+## Static Power BI design previews
+
+These 1920 × 1080 previews were generated from the canonical CSVs and the checked-in PBIR page/visual inventory so the report can be reviewed on macOS. They show the intended information design and real retained values, but do not prove M refresh, DAX execution, slicers, accessibility or performance in Power BI.
+
+![Settlement Service Monitor static design preview](screenshots/powerbi-static-preview-01-monitor.png)
+
+![Market and Settlement Analysis static design preview](screenshots/powerbi-static-preview-02-analysis.png)
+
+![Exception Investigation static design preview](screenshots/powerbi-static-preview-03-investigation.png)
+
+![Data Quality and Controls static design preview](screenshots/powerbi-static-preview-04-controls.png)
 
 ## The problem
 
@@ -64,7 +76,7 @@ The semantic model has Date and Settlement Period dimensions, Settlement and Dai
 | Exception Investigation | What happened, what is known, what is not established and what should be checked next? |
 | Data Quality & Controls | Can the selected snapshot be trusted, including retrieval and clock-change coverage? |
 
-`powerbi/project/Settlement.pbip` is the entry point. The DataFolder parameter must point to this project's `data` directory on the machine performing refresh. Local files require an appropriate Desktop or gateway-supported service route. The checked-in definitions parse through the official Modeling MCP but are not a published report or proof that measures execute. Genuine screenshots, interaction checks and runtime performance evidence remain pending; current authenticated Fabric discovery returned `UserNotLicensed`.
+`powerbi/project/Settlement.pbip` is the entry point. The DataFolder parameter must point to this project's `data` directory on the machine performing refresh. Local files require an appropriate Desktop or gateway-supported service route. The checked-in definitions parse through the official Modeling MCP but are not a published report or proof that measures execute. Genuine runtime screenshots, interaction checks and performance evidence remain pending; current authenticated Fabric discovery returned `UserNotLicensed`.
 
 ## Deliverables and reviewer documents
 
@@ -72,6 +84,8 @@ The semantic model has Date and Settlement Period dimensions, Settlement and Dai
 - Editable presentation: `reports/presentation/settlement-service-intelligence.pptx`; reviewed PDF export: `reports/presentation/settlement-service-intelligence.pdf`.
 - Presentation verification: `reports/presentation-qa.md`.
 - Licensed Power BI close-out checklist: `reports/powerbi-live-verification-checklist.md`.
+- Uploadable Windows reviewer bundle: `reports/elexon-powerbi-review-package.zip` (SHA-256 `c6424e8512d8dd0815181ad57512192dd626e9ed6ae418eaf8f0ec8dace7bcf2`); instructions: `reports/powerbi-reviewer-handoff.md`.
+- Static preview provenance and hashes: `screenshots/README.md` and `reports/powerbi-static-preview-qa.md`.
 - Reproducibility audit: `reports/reproducibility-qa.md`.
 - Definitions and analytical assumptions: `METHODOLOGY.md`.
 - Domain/API/tool sources and benchmark references: `SOURCES.md` and `research/`.
