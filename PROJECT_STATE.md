@@ -32,7 +32,7 @@ Three detailed cases cover maximum price, minimum price and maximum absolute NIV
 - Self-contained Windows reviewer bundle: `reports/elexon-powerbi-review-package.zip` (SHA-256 `b3850b4fc6c52e0b17f401d8064e3576d13b4afa6b18675fa0887fa1d8df6f3c`), containing the PBIP/PBIR/TMDL project, required processed/quality CSVs, preview images, verification checklist and a per-file SHA-256 manifest. A fresh extraction independently passed the report validator and Modeling MCP import; see `reports/powerbi-review-package-qa.md`.
 - Reviewer documentation: `README.md`, `METHODOLOGY.md`, `DECISIONS.md`, `SOURCES.md`, `SETUP_REPORT.md`, `SETUP_SOURCES.md` and `data/README.md`.
 - Evidence-safe application support: `reports/interview-preparation.md` and `reports/cv-bullets.md`, both restricted to the canonical Q4 figures and explicit about the pending licensed runtime gate.
-- Recruiter-facing multi-page site source: `site/`; published-site details are recorded after deployment without changing the Power BI design.
+- Recruiter-facing multi-page site source: `site/`; a static GitHub Pages delivery is also maintained in `docs/` without changing the Power BI design.
 
 ## Remaining external gate
 
@@ -50,7 +50,7 @@ No supported local action remains that can execute or render the report without 
 
 The smallest close is to send `reports/elexon-powerbi-review-package.zip` to a reviewer with licensed Windows Power BI Desktop. They should follow `reports/powerbi-reviewer-handoff.md` and `reports/powerbi-live-verification-checklist.md`: set `DataFolder`, refresh, compare all 19 measures, test interactions, inspect performance and capture all four genuine runtime pages. Do not claim runtime verification until that evidence passes.
 
-External portfolio publishing and application wording were authorised on 10 September. GitHub publishing could not proceed because no remote exists and the saved GitHub CLI authentication is invalid. A public recruiter site was therefore built and submitted through OpenAI Sites; its source/package are verified, while the hosting provider's publish job remains in progress at this handoff. Career wording is now supplied with the runtime limitation preserved; it does not claim live Power BI execution.
+External portfolio publishing and application wording were authorised on 10 September. The canonical project and recruiter site are publicly delivered at `https://liyrs58.github.io/elexonserviceintelligence/`; GitHub Pages deployment succeeded from the checked-in static delivery in `docs/`. Career wording preserves the runtime limitation and does not claim live Power BI execution.
 
 ## Reproduction and verification commands
 

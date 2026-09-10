@@ -1,5 +1,7 @@
 # GB Settlement & Imbalance Service Intelligence Monitor
 
+**Recruiter-ready project site:** https://liyrs58.github.io/elexonserviceintelligence/
+
 An independent operational analytics project using public Elexon data to validate Settlement Period information, identify unusual market conditions and structure evidence-led investigation.
 
 **This is an independent portfolio project and is not affiliated with or endorsed by Elexon.**
